@@ -13,9 +13,29 @@
 	<link href="src/css/font-awesome.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="src/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
+	<nav class="navbar navbar-inverse" role="navigation" id="myTabs">
+	    <div class="container-fluid">
+		    <div class="navbar-header">
+		        <button type="button" class="navbar-toggle" data-toggle="collapse"
+		                data-target="#example-navbar-collapse">
+		            <span class="sr-only">切换导航</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+		        <a class="navbar-brand active" href="#">首页</a>
+		    </div>
+		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+		        <ul class="nav navbar-nav" id="app-1">
+		            <todo-item v-for="item in list" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+		        </ul>
+		    </div>
+	    </div>
+	</nav>
 	<section class="agile-countdown">
 		<h1>relax,Homepage never...</h1>
 		<div class="agile-subtitle">
@@ -40,16 +60,32 @@
 			</ul>
 
 		</div>
-	<footer>Copyright &copy; 2019. www.qiaohx.com All rights reserved.</footer>
+
 </section>
+<footer>Copyright &copy; 2019. www.qiaohx.com All rights reserved.</footer>
 
 <script src="src/js/jquery-1.11.3.min.js"></script>
 <script src="src/js/simplyCountdown.js"></script>
+<script src="src/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
-  /**
-   * WARNING: I set this coundtown to be running until the end of times.
-   * So when you'll init the plugin, follow how it's done in plugin documentation.
-   */
+
+	Vue.component('todo-item',{
+		props: ['todo'],
+ 		template: '<li><a href="#">{{ todo.text }}</a></li>'
+	})
+
+	var app1 = new Vue({
+		el: "#app-1",
+		data: {
+			list: [
+				{id: 0, text: "蔬菜"},
+				{id: 1, text: "牛奶"},
+				{id: 2, text: "蛋白质"}
+			]
+		}
+	})
+
   var d = new Date();
 	d.setFullYear(2019);
 	d.setMonth(10);
@@ -58,6 +94,8 @@
 	d.setMinutes(9);
 	d.setSeconds(34);
 
+
+
     //jQuery example
     $('#simply-countdown-losange').simplyCountdown({
         year: d.getFullYear(),
@@ -65,6 +103,11 @@
         day: d.getDate(),
         enableUtc: false
     });
+
+	$('#myTabs a').click(function (e) {
+	    e.preventDefault()
+	    $(this).tab('show');
+	});
 </script>
 </body>
 </html>
