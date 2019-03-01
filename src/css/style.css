@@ -155,6 +155,7 @@ i.fa.fa-google-plus:hover{
 .simply-countdown-losange {
   overflow: visible;
   display: table;
+  margin: auto;
   font-family: 'Arial', sans-serif;
 }
 .simply-countdown-losange > .simply-section {
