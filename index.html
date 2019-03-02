@@ -62,29 +62,16 @@
 		</div>
 
 </section>
-<footer>Copyright &copy; 2019. www.qiaohx.com All rights reserved.</footer>
+<div id="app-2">
+<foot-nav></foot-nav>
+</div>
 
 <script src="src/js/jquery-1.11.3.min.js"></script>
 <script src="src/js/simplyCountdown.js"></script>
 <script src="src/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="common/nav.js"></script>
 <script>
-
-	Vue.component('todo-item',{
-		props: ['todo'],
- 		template: '<li><a href="#">{{ todo.text }}</a></li>'
-	})
-
-	var app1 = new Vue({
-		el: "#app-1",
-		data: {
-			list: [
-				{id: 0, text: "蔬菜"},
-				{id: 1, text: "牛奶"},
-				{id: 2, text: "蛋白质"}
-			]
-		}
-	})
 
   var d = new Date();
 	d.setFullYear(2019);
