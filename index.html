@@ -17,79 +17,70 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-inverse" role="navigation" id="myTabs">
-	    <div class="container-fluid">
-		    <div class="navbar-header">
-		        <button type="button" class="navbar-toggle" data-toggle="collapse"
-		                data-target="#example-navbar-collapse">
-		            <span class="sr-only">切换导航</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		        </button>
-		        <a class="navbar-brand active" href="#">首页</a>
-		    </div>
-		    <div class="collapse navbar-collapse" id="example-navbar-collapse">
-		        <ul class="nav navbar-nav" id="app-1">
-		            <todo-item v-for="item in list" v-bind:todo="item" v-bind:key="item.id"></todo-item>
-		        </ul>
-		    </div>
-	    </div>
-	</nav>
-	<section class="agile-countdown">
-		<h1>relax,Homepage never...</h1>
-		<div class="agile-subtitle">
-			<h2>SERVER DEAD ON:</h2>
-		</div>
-		<div class="agile-timer">
-			<div class="simply-countdown-losange" id="simply-countdown-losange"></div>
-		</div>
-		<div class="agile-fields">
-			<p>Home is impossible, and it is impossible in this life. If you can understand, congratulations, if you don't understand, then you will wait. . . </p>
-		</div>
-		<div class="social-icons">
-			<ul>
-				<li><a href="javascript:void(0)" onclick="alert('想啥呢')"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+	<div id="app">
+		<Hander>
+			<ul class="nav navbar-nav" slot="web" id="app-1">
+				<li v-for="item in list" v-bind:key="item.id"><a>{{ item.text }}</a></li>
 			</ul>
-
-		</div>
-
-</section>
-<div id="app-2">
-<foot-nav></foot-nav>
-</div>
-
+		</Hander>
+		<nav-footer></nav-footer>
+	</div>
+</body>
+</html>
 <script src="src/js/jquery-1.11.3.min.js"></script>
 <script src="src/js/simplyCountdown.js"></script>
 <script src="src/bootstrap/js/bootstrap.min.js"></script>
 <script src="src/vue/vue-dev.js"></script>
-<script src="common/nav.js"></script>
-<script>
-
-  var d = new Date();
-	d.setFullYear(2019);
-	d.setMonth(10);
-    d.setDate(31);
-	d.setHours(9);
-	d.setMinutes(9);
-	d.setSeconds(34);
-
-
-
-    //jQuery example
-    $('#simply-countdown-losange').simplyCountdown({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        day: d.getDate(),
-        enableUtc: false
-    });
-
-	$('#myTabs a').click(function (e) {
-	    e.preventDefault()
-	    $(this).tab('show');
+<script src="common/common.js"></script>
+<script type="text/javascript">
+	// 1.准备所需模块 extend()注册
+	// 头部组件
+	 Vue.component('hander',{
+		template: `
+		<div class="navbar navbar-inverse" role="navigation" id="myTabs">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#example-navbar-collapse">
+						<span class="sr-only">切换导航</span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand active" href="#">首页</a>
+				</div>
+				<div class="collapse navbar-collapse" id="example-navbar-collapse">
+					<slot name="web"></slot>
+				</div>
+			</div>
+		</div>
+		`
 	});
+	Vue.component('nav-footer',{
+		template: `
+			<footer>
+				<P>Copyright &copy; 2019. www.qiaohx.com All rights reserved.</P>
+			</footer>
+		`
+	})
+
+	// 2.实例化一个对象
+	var vm = new Vue({
+		el: '#app',
+		data: {
+	        list: [
+	            {id: 0, text: "蔬菜"},
+	            {id: 1, text: "牛奶"},
+	            {id: 2, text: "蛋白质"}
+	        ],
+			year: ''
+	    },
+		computed: {
+			thisYear: function () {
+				return Date.now();
+			}
+		}
+	});
+	vm.year = 2019;
+
 </script>
-</body>
-</html>

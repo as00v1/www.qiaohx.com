@@ -21,7 +21,13 @@ span.simply-amount,span.simply-word{
 	clear:both;
 }
 footer{
+    border-top: 1px solid #DCDCDC;
 	font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 }
 /*--/reset code--*/
 .agile-countdown h1 {
