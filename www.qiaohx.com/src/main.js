@@ -7,10 +7,11 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import $ from 'jquery'
 import bootstrap from 'bootstrap/dist/js/bootstrap.min'
-import common from '@/assets/js/common'
+import {isEmpty} from '@/assets/js/common'
 
 import '@/assets/css/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 
 // Vue.use(VueAxios,axios);

@@ -5,4 +5,4 @@ function isEmpty(obj){
         return false;
     }
 }
-exports {common}
+export  {isEmpty}
