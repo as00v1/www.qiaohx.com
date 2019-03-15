@@ -19,7 +19,6 @@
                         <input type="radio" v-model="picked" name="optionsRadios" id="optionsRadios2" value="DES">DES
                     </label>
                 </div>
-                <!-- <span>picked:{{ picked }}</span> -->
                 <div class="form-group">
                     <label for="inputPassword" class="control-label">密码</label>
                     <input type="text" v-model="key" class="form-control" id="inputPassword" placeholder="请输入8位密码">
@@ -41,6 +40,7 @@
 </template>
 
 <script>
+// import {isEmpty,test} from '@/assets/js/common'
 import Model from '../../components/Model'
 export default {
     name: 'ToolItem',
@@ -59,15 +59,16 @@ export default {
     },
     methods: {
         getEncryptTxt: function() {
-            if(isEmpty(content) && isEmpty(key) && isEmpty(picked)) {
+            console.log(this.isEmpty(this.content))
+            if(isEmpty(this.content) && isEmpty(this.key) && isEmpty(this.picked)) {
                 this.bol = true;
                 if(this.picked == 'DES') {
-                    this.$axios.post('https://www.qiaohx.com/encrypt/des/getValue', {
+                    this.$axios.post('https://www.qiaohx.com/encrypt/des/encrypt', {
                         "content": this.content,
                         "key": this.key
                     }).then(function (response) {
-                        console.log(response);
-                        this.tips = data.data.errMsg;
+                        console.log(response.data.errMsg);
+                        this.tips = response.data.errMsg;
                     }).catch(function (error) {
                         console.log(error);
                     });
