@@ -1,7 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -12,6 +11,7 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.min'
 import '@/assets/css/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import App from './App'
 // 第一种和第三种使用方法：
 // (全局)
 import common from '@/assets/js/common'
