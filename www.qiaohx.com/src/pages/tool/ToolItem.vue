@@ -40,7 +40,6 @@
 </template>
 
 <script>
-// import {isEmpty,test} from '@/assets/js/common'
 import Model from '../../components/Model'
 export default {
     name: 'ToolItem',
@@ -59,8 +58,8 @@ export default {
     },
     methods: {
         getEncryptTxt: function() {
-            console.log(this.isEmpty(this.content))
-            if(isEmpty(this.content) && isEmpty(this.key) && isEmpty(this.picked)) {
+            console.log(this.common.isEmpty(this.content))
+            if(this.common.isEmpty(this.content) && this.common.isEmpty(this.key) && this.common.isEmpty(this.picked)) {
                 this.bol = true;
                 if(this.picked == 'DES') {
                     this.$axios.post('https://www.qiaohx.com/encrypt/des/encrypt', {
