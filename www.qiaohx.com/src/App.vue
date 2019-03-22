@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+      <vueCanvasNest :config="{color:'255,255,255',opacity:1}"></vueCanvasNest>
     <NavHeader>
         <ul class="nav navbar-nav" slot="web">
             <li v-for="item in list" v-bind:key="item.id">
@@ -17,12 +18,14 @@
 <script>
 import NavHeader from './components/NavHeader'
 import NavFooter from './components/NavFooter'
+import vueCanvasNest from 'vue-canvas-nest'
 
 export default {
   name: 'App',
   components: {
     NavHeader,
-    NavFooter
+    NavFooter,
+    vueCanvasNest
   },
   data() {
       return {

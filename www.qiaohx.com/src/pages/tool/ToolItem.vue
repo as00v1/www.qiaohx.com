@@ -66,7 +66,8 @@ export default {
                         this.msg = "请输入至少8位密码";
                     }
                     else {
-                        this.$axios.post('https://www.qiaohx.com/encrypt/des/encrypt', {
+                        console.log(this.$base.baseUrl)
+                        this.$axios.post(this.$base.baseUrl + this.$base.desDecrypt, {
                             "content": this.content,
                             "key": this.key
                         }).then(function (response) {
