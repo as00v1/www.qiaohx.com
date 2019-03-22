@@ -90,7 +90,7 @@ export default {
         },
         getDecryptTxt: function() {
             if(this.picked == 'DES') {
-                this.$axios.post('https://www.qiaohx.com/encrypt/des/getValue', {
+                this.$axios.post('https://www.qiaohx.com/encrypt/des/decrypt', {
                     "decryptContent": this.content,
                     "key": this.key
                 }).then(function (response) {
@@ -112,5 +112,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-textarea {height: 50vh;}
+textarea {height: 50vh !important;}
 </style>
