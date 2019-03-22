@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <div class="col-xs-8 col-sm-8 col-md-offset-2">
                         <button type="button" v-on:click="getEncryptTxt" data-toggle="modal" v-bind:data-target="bol ? '.bs-example-modal-sm' : ''" class="btn btn-primary btn-block">加密<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
-                        <button type="button" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>解密</button>
+                        <button type="button" v-on:click="getDecryptTxt" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>解密</button>
                     </div>
                 </div>
             </div>
