@@ -1,43 +1,48 @@
 <template lang="html">
     <div class="container">
-        <div class="row login_box">
-            <div class="login_item">
+        <div class="row login-box">
+            <LoginItem txt="name" inputName="username" @someEvent="getFocus" :sel="focused"></LoginItem>
+            <!-- <div class="login-box__item">
                 <input @focus="fnFocus" @blur="fnBlur" :class="{'border_blue': focus}" type="text" name="username" value="">
-                <label :class="{'move_top': focus}">name</label>
+                <label @click="fnFocus" :class="{'login-box__label_move_top': focus}">name</label>
             </div>
-            <div class="login_item">
-                <input type="text" name="" value="">
-                <label>password</label>
-            </div>
+            <div class="login-box__item">
+                <input @focus="fnFocus" @blur="fnBlur" :class="{'border_blue': focus}" type="text" name="password" value="">
+                <label @click="fnFocus" :class="{'login-box__label_move_top': focus}">password</label>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
+import LoginItem from '../pages/login/loginItem'
 export default {
     name: 'Login',
+    components: {
+        LoginItem
+    },
     data: function(){
         return {
-            focus: false
+            focus: false,
+            focused: ''
         }
     },
     methods: {
+        // 1、父组件可以使用 props 把数据传给子组件。
+        // 2、子组件可以使用 $emit 触发父组件的自定义事件。
         fnFocus: function() {
             this.focus = true;
         },
         fnBlur: function() {
-            // if($())
+            this.focus = false;
+        },
+        getFocus: function(val) {
+            this.focused = val;
+            console.log(this.focused)
         }
     }
 }
 </script>
-
-<style lang="css" scoped>
-    .login_box {background: #FFF;}
-    .login_item {height: 50px;margin: 10px;position: relative;}
-    .login_item input {outline: none;border-radius: 10px;border: 1px solid #DCDCDC;height: 45px;padding: 0 10px;}
-    .login_item label {color: #8B8B8B;position: absolute;left: 10px;top: 12px;}
-
-    .border_blue {border: 1px solid blue !important;}
-    .move_top {top: -15px !important;}
+<style lang="scss" type="text/css">
+    @import '~@/assets/css/login'
 </style>

@@ -1,0 +1,18 @@
+// BEM 不能在BEM中使用元素选择器和ID选择器
+// Block: what is it?--menu or button--可嵌套、复用   不影响自身布局
+// Element: why is it?--表示目的 block-name__element-name
+// Modifier: what dose it look like? block-name__element-name_modifier-name
+$white-color: #FFF;
+
+.login-box {background: $white-color;}
+.login-box__item {
+    margin: 10px;position: relative;padding-top: 15px;
+    input {
+        height: 45px;outline: none;border: none; border-bottom: 1px solid #DCDCDC;padding: 0 10px;
+    }
+    label {
+        color: #8B8B8B;position: absolute;left: 10px;top: 27px;cursor: text;
+    }
+}
+.label-focus {border: 1px solid blue;}
+.login-box__label_move_top {top: -10px !important;transition: all 0.5s;}
