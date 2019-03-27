@@ -1,7 +1,8 @@
 <template lang="html">
     <div class="container">
         <div class="row login-box">
-            <LoginItem txt="name" inputName="username" @someEvent="getFocus" :sel="focused"></LoginItem>
+            <LoginItem txt="name" inputName="username" @change="getfocus" :sel="selectedName"></LoginItem>
+            <LoginItem txt="password" inputName="password" @change="getfocus" :sel="selectedName"></LoginItem>
             <!-- <div class="login-box__item">
                 <input @focus="fnFocus" @blur="fnBlur" :class="{'border_blue': focus}" type="text" name="username" value="">
                 <label @click="fnFocus" :class="{'login-box__label_move_top': focus}">name</label>
@@ -19,12 +20,15 @@ import LoginItem from '../pages/login/loginItem'
 export default {
     name: 'Login',
     components: {
+        // 子传父：   $emit
+        // 父传子：   props
         LoginItem
+        // LoginItem是子组件
     },
     data: function(){
         return {
             focus: false,
-            focused: ''
+            selectedName: ''
         }
     },
     methods: {
@@ -36,9 +40,8 @@ export default {
         fnBlur: function() {
             this.focus = false;
         },
-        getFocus: function(val) {
-            this.focused = val;
-            console.log(this.focused)
+        getfocus: function(val) {
+            this.selectedName = val;
         }
     }
 }

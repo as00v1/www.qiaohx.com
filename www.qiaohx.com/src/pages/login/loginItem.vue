@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="login-box__item">
-        <input :name="inputName"  v-on:focus='getName' type="text" />
-        <label>{{ txt }}</label>
+        <input :class="{'label-focus': bol}" :name="inputName"  @focus='getName' @blur="fnBlur($event)" type="text" />
+        <label @click='getName':class="{'login-box__label_move_top': bol}">{{ txt }}</label>
     </div>
 </template>
 
@@ -9,20 +9,40 @@
 export default {
     name: 'LoginItem',
     props: ['inputName','sel','txt'],
+    data: function(){
+        return {
+            flag: true
+        }
+    },
     computed: {
-        bol: function(){
-            if(this.sel == this.name){
-                return true;
+        bol: {
+            get: function() {
+                if(this.sel == this.inputName){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
+            set: function(newValue) {
+                return newValue;
             }
-            else {
+        }
+    },
+    watch: {
+        bol: function() {
+            console.log(this.flag)
+            if(!this.flag) {
                 return false;
             }
         }
     },
-    method: {
+    methods: {
         getName: function(){
-            this.$emit('someEvent',this.name);
-            console.log(this.name)
+            this.$emit('change',this.inputName);
+        },
+        fnBlur: function(e) {
+            console.log(e);
         }
     }
 }
