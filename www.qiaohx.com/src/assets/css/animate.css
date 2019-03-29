@@ -1,0 +1,27 @@
+/* 点击切换-左侧隐藏右侧出现 */
+@keyframes enter {from {transform: translate(0);color: #fff;} to {transform: translate(20px);color: #176478;}}
+@-moz-keyframes enter {from {-moz-transform: translate(0);color: #fff;} to {-moz-transform: translate(20px);color: #176478;}}
+@-webkit-keyframes enter {from {-webkit-transform: translate(0);color: #fff;} to {-webkit-transform: translate(20px);color: #176478;}}
+@-o-keyframes enter {from {-o-transform: translate(0);color: #fff;} to {-o-transform: translate(20px);color: #176478;}}
+
+/* 进入动画 */
+@keyframes fade-in {from {opacity: .2} to {opacity: .8}}
+@-moz-keyframes fade-in {from {opacity: .2} to {opacity: .8}}
+@-webkit-keyframes fade-in {from {opacity: .2} to {opacity: .8}}
+@-o-keyframes fade-in {from {opacity: .2} to {opacity: .8}}
+
+/* 点击进入右侧动画 */
+@keyframes enterRight {from {opacity: 1;right: 0;} to {opacity: 0;right: 100%;}}
+@-moz-keyframes enterRight {from {opacity: 1;right: 0;} to {opacity: 0;right: 100%;}}
+@-webkit-keyframes enterRight {from {opacity: 1;right: 0;} to {opacity: 0;right: 100%;}}
+@-o-keyframes enterRight {from {opacity: 1;right: 0;} to {opacity: 0;right: 100%;}}
+
+/* 点击从右侧划入动画 */
+@keyframes enterFromRight {from {opacity: 0;left: 100%;} to {opacity: 1;left: 0;}}
+@-moz-keyframes enterFromRight {from {opacity: 0;left: 100%;} to {opacity: 1;left: 0;}}
+@-webkit-keyframes enterFromRight {from {opacity: 0;left: 100%;} to {opacity: 1;left: 0;}}
+@-o-keyframes enterFromRight {from {opacity: 0;left: 100%;} to {opacity: 1;left: 0;}}
+
+@keyframes Gradient {
+    /* 渐变：还没想好怎么实现 */
+}

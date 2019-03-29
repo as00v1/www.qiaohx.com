@@ -1,29 +1,27 @@
 <template lang="html">
-    <div class="container">
         <div class="row login-box">
-            <LoginItem txt="name" inputName="username" @change="getfocus" :sel="selectedName"></LoginItem>
-            <LoginItem txt="password" inputName="password" @change="getfocus" :sel="selectedName"></LoginItem>
-            <!-- <div class="login-box__item">
-                <input @focus="fnFocus" @blur="fnBlur" :class="{'border_blue': focus}" type="text" name="username" value="">
-                <label @click="fnFocus" :class="{'login-box__label_move_top': focus}">name</label>
+            <div class="col-md-10 col-md-offset-1">
+                <h3>登录</h3>
+                <InputItem txt="请输入用户名" inputType="text"></InputItem>
+                <InputItem txt="请输入密码" inputType="password"></InputItem>
+                <div class="" role="group">
+                    <button type="button" class="btn btn-default">忘记密码</button>
+                    <button type="button" class="btn btn-info">创建账号</button>
+                    <button type="button" class="btn btn-primary">登录</button>
+                </div>
             </div>
-            <div class="login-box__item">
-                <input @focus="fnFocus" @blur="fnBlur" :class="{'border_blue': focus}" type="text" name="password" value="">
-                <label @click="fnFocus" :class="{'login-box__label_move_top': focus}">password</label>
-            </div> -->
         </div>
-    </div>
 </template>
 
 <script>
-import LoginItem from '../pages/login/loginItem'
+import InputItem from '../pages/Form/InputItem'
 export default {
     name: 'Login',
     components: {
         // 子传父：   $emit
         // 父传子：   props
-        LoginItem
-        // LoginItem是子组件
+        InputItem
+        // InputItem
     },
     data: function(){
         return {
@@ -34,15 +32,15 @@ export default {
     methods: {
         // 1、父组件可以使用 props 把数据传给子组件。
         // 2、子组件可以使用 $emit 触发父组件的自定义事件。
-        fnFocus: function() {
-            this.focus = true;
-        },
-        fnBlur: function() {
-            this.focus = false;
-        },
-        getfocus: function(val) {
-            this.selectedName = val;
-        }
+        // fnFocus: function() {
+        //     this.focus = true;
+        // },
+        // fnBlur: function() {
+        //     this.focus = false;
+        // },
+        // getfocus: function(val) {
+        //     this.selectedName = val;
+        // }
     }
 }
 </script>
