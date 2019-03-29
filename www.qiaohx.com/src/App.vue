@@ -8,10 +8,12 @@
                 </li>
             </ul>
         </NavHeader>
-        <section>
-            <router-view/>
-        </section>
-        <Login></Login>
+        <router-view/>
+        <div class="row">
+            <div class="main-box col-md-6">
+                <Login></Login>
+            </div>
+        </div>
         <NavFooter></NavFooter>
     </div>
 </template>
@@ -41,6 +43,6 @@ export default {
   }
 }
 </script>
-<style>
-    section {margin-top: 75px;}
+<style lang="scss" type="text/css">
+    @import '~@/assets/css/index';
 </style>
