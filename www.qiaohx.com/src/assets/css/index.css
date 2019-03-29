@@ -87,15 +87,6 @@ h3 {
   .main-box:hover {
     box-shadow: 0 0 8px 3px #DCDCDC; }
 
-.main-box input {
-  border-radius: 5px;
-  border: 1px solid #fff;
-  background-color: transparent;
-  outline: none;
-  height: 35px;
-  margin: 15px auto;
-  padding: 5px; }
-
 input[type="button"] {
   background-color: #fff;
   color: #333333; }

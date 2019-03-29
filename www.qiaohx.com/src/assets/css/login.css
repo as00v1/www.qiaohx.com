@@ -28,7 +28,7 @@ button {
     color: #8B8B8B;
     position: absolute;
     left: 10px;
-    top: 35px;
+    top: 20px;
     cursor: text;
     transition: all 0.3s;
     padding: 0 5px; }
@@ -37,7 +37,7 @@ button {
   .input-box__item .label-font-color {
     color: #1A73E8 !important; }
   .input-box__item .stop_move {
-    top: 8px;
+    top: 0px;
     color: #8B8B8B;
     background-color: #FFF; }
 
