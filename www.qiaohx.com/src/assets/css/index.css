@@ -75,6 +75,9 @@ h3 {
 .filter-dark {
   filter: brightness(60%); }
 
+@media screen and (max-width: 768px) {
+  .main-box {
+    border: 0 !important; } }
 .main-box {
   border-radius: 5px;
   margin: auto;
@@ -83,7 +86,8 @@ h3 {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  transition: all 1s; }
+  transition: all 1s;
+  border: 1px solid #DCDCDC; }
   .main-box:hover {
     box-shadow: 0 0 8px 3px #DCDCDC; }
 

@@ -17,25 +17,29 @@ button{
     font-family: "SimHei";
 }
 .login-box {
-    background: $white-color;border-radius: 5px;padding: 15px;
+    // background: $white-color;border-radius: 5px;padding: 15px;
+    background: rgba(216, 216, 216, 0);border-radius: 5px;padding: 15px;
 }
 .input-box__item {
     margin: 10px;position: relative;padding-top: 5px;
     input {
-        height: 50px;width: 100%;outline: none;border: none; border: 1px solid #DCDCDC;padding: 0 10px;border-radius: 10px;
+        height: 54px;width: 100%;outline: none;border: none; border: 1px solid #DCDCDC;padding: 0 10px;border-radius: 10px; font-size: 20px;
     }
     label {
-        display: inline-block;color: $font-color;position: absolute;left: 10px;top: 20px;cursor: text;transition: all 0.3s;padding: 0 5px;
+        display: inline-block;color: $font-color;position: absolute;left: 10px;top: 20px;cursor: text;transition: all 0.3s;padding: 0 5px;font-size: 17px;font-weight: 500
     }
     .label-focus {
-        border: 3px solid $color-blue;
+        border: 2px solid $color-blue;
     }
     .label-font-color {
         color: $color-blue !important;
     }
+    // .label-font-size {
+    //     font-size: 15px;
+    // }
     .stop_move {
-        top: 0px;color: $font-color;
-
+        top: -3px;color: $font-color;
         background-color: $white-color;
+        font-size: 15px;
     }
 }

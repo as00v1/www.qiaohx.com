@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <vueCanvasNest :config="{color:'255,255,255',opacity:1}"></vueCanvasNest>
+        <vueCanvasNest :config="{color:'0,0,0',opacity:1}"></vueCanvasNest>
         <NavHeader>
             <ul class="nav navbar-nav" slot="web">
                 <li v-for="item in list" v-bind:key="item.id">
@@ -10,7 +10,7 @@
         </NavHeader>
         <router-view/>
         <div class="row">
-            <div class="main-box col-md-6">
+            <div class="main-box col-md-4 col-xs-12 col-sm-8">
                 <Login></Login>
             </div>
         </div>
