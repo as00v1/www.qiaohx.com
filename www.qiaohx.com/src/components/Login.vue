@@ -4,9 +4,9 @@
                 <h3>登录</h3>
                 <InputItem txt="请输入用户名" inputType="text"></InputItem>
                 <InputItem txt="请输入密码" inputType="password"></InputItem>
-                <div class="" role="group">
-                    <button type="button" class="btn btn-default">忘记密码</button>
-                    <button type="button" class="btn btn-info">创建账号</button>
+                <div class="input-box__item" role="group">
+                    <!-- <button type="button" class="btn btn-default">忘记密码</button>
+                    <button type="button" class="btn btn-info">创建账号</button> -->
                     <button type="button" class="btn btn-primary">登录</button>
                 </div>
             </div>

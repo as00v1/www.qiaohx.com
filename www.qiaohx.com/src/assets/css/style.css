@@ -1,6 +1,6 @@
 /*--reset code--*/
 body {
-    background: url(../images/banner2.jpg) 0px 0px no-repeat;
+    /* background: url(../images/banner2.jpg) 0px 0px no-repeat; */
     background-position: 50% 50%;
     background-size: cover;
 	background-attachment:fixed;
