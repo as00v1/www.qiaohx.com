@@ -8,22 +8,17 @@
                         <router-link class="text-right" v-bind:to="item.link">{{ item.text }}</router-link>
                     </li>
                 </ul>
-                <div class="pull-right navheader-title">
+                <div class="pull-right navheader-title hidden-xs">
                     <router-link to="/Login">登录</router-link>
                     <router-link class="border-white" to="/SignUp">注册</router-link>
                 </div>
             </div>
-            <!-- <div slot="sign" class="pull-right navheader-title">
+            <span slot="sign" class="navheader-title visible-xs-inline-block">
                 <router-link to="/Login">登录</router-link>
                 <router-link class="border-white" to="/Login">注册</router-link>
-            </div> -->
+            </span>
         </NavHeader>
         <router-view/>
-        <!-- <div class="row">
-            <div class="main-box col-md-4 col-xs-12 col-sm-8">
-                <Login></Login>
-            </div>
-        </div> -->
         <NavFooter></NavFooter>
     </div>
 </template>
