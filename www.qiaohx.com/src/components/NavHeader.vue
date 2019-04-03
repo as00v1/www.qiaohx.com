@@ -2,15 +2,17 @@
     <div class="navbar navbar-inverse" role="navigation" id="myTabs">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#example-navbar-collapse">
-                    <span class="sr-only"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+                <div class="pull-right">
+                    <slot name="sign"></slot>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#example-navbar-collapse">
+                        <span class="sr-only"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
                 <router-link class="navbar-brand active" :to="home">首页</router-link>
-                <!-- <router-view></router-view> -->
             </div>
             <div class="collapse navbar-collapse" id="example-navbar-collapse">
                 <slot name="web"></slot>

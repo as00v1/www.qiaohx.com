@@ -5,6 +5,7 @@
 // Modifier: what dose it look like? block-name__element-name_modifier-name
 $white-color: #FFF;
 $color-blue: #1A73E8;
+$color-btn-hover: #4285F4;
 $font-color: #8B8B8B;
 
 // common.css
@@ -21,7 +22,7 @@ button{
     background: rgba(216, 216, 216, 0);border-radius: 5px;padding: 15px;
 }
 .input-box__item {
-    margin: 10px;position: relative;padding-top: 5px;
+    margin: 10px;position: relative;padding-top: 5px;display: flex;justify-content: space-between;align-items: center;
     input {
         height: 54px;width: 100%;outline: none;border: none; border: 1px solid #DCDCDC;padding: 0 10px;border-radius: 10px; font-size: 20px;
     }
@@ -34,12 +35,21 @@ button{
     .label-font-color {
         color: $color-blue !important;
     }
-    // .label-font-size {
-    //     font-size: 15px;
-    // }
     .stop_move {
         top: -3px;color: $font-color;
         background-color: $white-color;
         font-size: 15px;
+    }
+    a {
+        font-size: 18px;
+        color: $color-blue;
+        cursor: pointer;
+    }
+    button {
+        background-color: $color-blue;
+        border: none;
+        &:hover {
+            background-color: $color-btn-hover;
+        }
     }
 }

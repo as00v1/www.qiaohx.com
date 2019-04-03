@@ -1,16 +1,19 @@
 <template lang="html">
-        <div class="row login-box">
-            <div class="col-md-10 col-md-offset-1">
-                <h3>登录</h3>
-                <InputItem txt="请输入用户名" inputType="text"></InputItem>
-                <InputItem txt="请输入密码" inputType="password"></InputItem>
-                <div class="input-box__item" role="group">
-                    <!-- <button type="button" class="btn btn-default">忘记密码</button>
-                    <button type="button" class="btn btn-info">创建账号</button> -->
-                    <button type="button" class="btn btn-primary">登录</button>
+    <div class="row">
+        <div class="main-box col-md-4 col-xs-12 col-sm-8">
+            <div class="row login-box">
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>登录</h3>
+                    <InputItem txt="请输入用户名" inputType="text"></InputItem>
+                    <InputItem txt="请输入密码" inputType="password"></InputItem>
+                    <div class="input-box__item">
+                        <span><router-link to="/SignUp">没有账号？立即注册</router-link></span>
+                        <button type="button" class="btn btn-lg btn-primary">登录</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
