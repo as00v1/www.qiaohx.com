@@ -7,7 +7,7 @@
                     <InputItem txt="请输入用户名" inputType="text"></InputItem>
                     <InputItem txt="请输入密码" inputType="password"></InputItem>
                     <div class="input-box__item">
-                        <span>忘记密码？</span>
+                        <span><router-link to="/SignUp">没有账号？立即注册</router-link></span>
                         <button type="button" class="btn btn-lg btn-primary">登录</button>
                     </div>
                 </div>

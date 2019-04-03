@@ -10,7 +10,7 @@
                 </ul>
                 <div class="pull-right navheader-title">
                     <router-link to="/Login">登录</router-link>
-                    <router-link class="border-white" to="/Login">注册</router-link>
+                    <router-link class="border-white" to="/SignUp">注册</router-link>
                 </div>
             </div>
             <!-- <div slot="sign" class="pull-right navheader-title">
