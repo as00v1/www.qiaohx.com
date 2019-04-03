@@ -13,7 +13,6 @@ $end-color: $gradient-color-1;
     width: 100%;
     z-index: 9;
 }
-
 .contentBox {
     height: 100%;
     width: 100%;
@@ -107,9 +106,9 @@ h3 {
     text-align: center;
     transition: all 1s;
     border: 1px solid #DCDCDC;
-    &:hover {
-        box-shadow: 0 0 8px 3px #DCDCDC;
-    }
+    // &:hover {
+    //     box-shadow: 0 0 8px 3px #DCDCDC;
+    // }
 }
 
 input[type="button"] {
@@ -164,4 +163,21 @@ input[type="button"] {
     line-height: 35px;
     text-align: center;
     text-decoration: none;
+}
+.navheader-title {
+    margin-top: 7px;
+    a {
+        display: inline-block;
+        width: 50px;
+        text-align: center;
+        color: #FFF;
+        padding: 5px;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    .border-white {
+        border: 1px solid #fff;
+        border-radius: 5px;
+    }
 }

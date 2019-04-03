@@ -2,6 +2,7 @@
     <div class="navbar navbar-inverse" role="navigation" id="myTabs">
         <div class="container-fluid">
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#example-navbar-collapse">
                     <span class="sr-only"></span>
@@ -10,8 +11,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 <router-link class="navbar-brand active" :to="home">首页</router-link>
-                <!-- <router-view></router-view> -->
             </div>
+            <!-- <slot name="sign"></slot> -->
             <div class="collapse navbar-collapse" id="example-navbar-collapse">
                 <slot name="web"></slot>
             </div>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Tool from '@/components/Tool'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/Tool',
       name: 'Tool',
       component: Tool
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
     },
 
   ]
