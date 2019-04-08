@@ -21,7 +21,7 @@ export default {
             flagTitleColor: false,
             flagUser: false,
             tipValue: "",
-            passwordFirst:""
+            passwordFirst: ""
         }
     },
     methods: {
@@ -40,8 +40,8 @@ export default {
             else {
                 this.flagTitleMove = true;
                 var that = this;
-                // 输入用户名
                 if(this.inputName == "reg_username"){
+                    // 输入用户名
                     // 用户名校验
                     this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
                         "certType": "00",
@@ -49,6 +49,7 @@ export default {
                     }).then(function (response) {
                         if(response.data.code == 0 && response.status == 200){
                             that.flagUser = false;
+                            that.$emit('inputUserName',that.inputValue);
                         }
                         else {
                             that.flagUser = true;
@@ -58,8 +59,8 @@ export default {
                         console.log(error);
                     });
                 }
-                // 输入密码
                 else if(this.inputName == "reg_password") {
+                    // 输入密码
                     if(this.inputValue.length < 8) {
                         this.flagUser = true;
                         this.tipValue = "密码最少输入8位！";
@@ -67,11 +68,12 @@ export default {
                     else {
                         this.flagUser = false;
                         this.passwordFirst = this.inputValue;
-                        return;
+                        this.$emit('inputPsd',this.inputValue);
+                        console.log(this.passwordFirst);
                     }
                 }
-                // 输入确认密码
                 else if(this.inputName == "reg_password_again") {
+                    // 输入确认密码
                     console.log(this.passwordFirst)
                     if(this.inputValue != this.passwordFirst) {
                         this.flagUser = true;
