@@ -20,11 +20,9 @@ export default {
             flagInput: false,
             flagTitleColor: false,
             flagUser: false,
-            tipValue: ""
+            tipValue: "",
+            passwordFirst:""
         }
-    },
-    watch: {
-        passwordFirst:""
     },
     methods: {
         fnFocus: function(){
@@ -69,6 +67,7 @@ export default {
                     else {
                         this.flagUser = false;
                         this.passwordFirst = this.inputValue;
+                        return;
                     }
                 }
                 // 输入确认密码
