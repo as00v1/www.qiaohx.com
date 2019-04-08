@@ -6,17 +6,19 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import $ from 'jquery'
 import bootstrap from 'bootstrap/dist/js/bootstrap.min'
-// import baseUrl from '@/assets/js/baseUrl.js'
 import '@/assets/css/style.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App'
 import common from '@/assets/js/common'
+import * as baseUrl from '@/assets/js/baseUrl'
 
-Vue.prototype.$axios = axios;
+
 Vue.config.productionTip = false;
+
 Vue.prototype.common = common;
-// Vue.prototype.$base = baseUrl;
+Vue.prototype.$axios = axios;
+Vue.prototype.$base = baseUrl;
 
 /* eslint-disable no-new */
 new Vue({

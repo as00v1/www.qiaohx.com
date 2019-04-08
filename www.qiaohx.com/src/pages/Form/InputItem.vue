@@ -1,7 +1,10 @@
 <template lang="html">
     <div class="input-box__item">
-        <input :class="{'label-focus': flagInput}" v-model="inputValue" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' type="text" />
-        <label :class="{'stop_move': flagTitleMove,'label-font-color': flagTitleColor}" @click='$el.children[0].focus()'>{{ txt }}</label>
+        <div>
+            <input :class="{'label-focus': flagInput, 'label-focus-error': flagUser}" v-model="inputValue" :name="inputName" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' type="text" />
+            <label :class="{'stop_move': flagTitleMove,'label-font-color': flagTitleColor, 'label-font-color-error': flagUser}" @click='$el.children[0].children[0].focus()'>{{ txt }}</label>
+        </div>
+        <div v-show="flagUser" class="alert alert-danger" role="alert">{{ tipValue }}</div>
     </div>
 </template>
 
@@ -9,14 +12,19 @@
 
 export default {
     name: 'InputItem',
-    props: ['inputType','txt'],
+    props: ['inputType','txt','inputName'],
     data: function(){
         return {
             inputValue: '',
             flagTitleMove: false,
             flagInput: false,
-            flagTitleColor: false
+            flagTitleColor: false,
+            flagUser: false,
+            tipValue: ""
         }
+    },
+    watch: {
+        passwordFirst:""
     },
     methods: {
         fnFocus: function(){
@@ -24,7 +32,7 @@ export default {
             this.flagInput = true;
             this.flagTitleColor = true;
         },
-        fnBlur: function() {
+        fnBlur: function(e) {
             this.flagInput = false;
             this.flagTitleColor = false;
             // 输入值为空
@@ -33,6 +41,44 @@ export default {
             }
             else {
                 this.flagTitleMove = true;
+                var that = this;
+                // 输入用户名
+                if(this.inputName == "reg_username"){
+                    // 用户名校验
+                    this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
+                        "certType": "00",
+                        "loginCert": this.inputValue
+                    }).then(function (response) {
+                        if(response.data.code == 0 && response.status == 200){
+                            that.flagUser = false;
+                        }
+                        else {
+                            that.flagUser = true;
+                            that.tipValue = "用户名已存在！";
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+                // 输入密码
+                else if(this.inputName == "reg_password") {
+                    if(this.inputValue.length < 8) {
+                        this.flagUser = true;
+                        this.tipValue = "密码最少输入8位！";
+                    }
+                    else {
+                        this.flagUser = false;
+                        this.passwordFirst = this.inputValue;
+                    }
+                }
+                // 输入确认密码
+                else if(this.inputName == "reg_password_again") {
+                    console.log(this.passwordFirst)
+                    if(this.inputValue != this.passwordFirst) {
+                        this.flagUser = true;
+                        this.tipValue = "两次密码不一致！";
+                    }
+                }
             }
         }
     },
