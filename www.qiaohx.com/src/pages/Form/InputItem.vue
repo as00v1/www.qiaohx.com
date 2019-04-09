@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="input-box__item">
         <div>
-            <input :class="{'label-focus': flagInput, 'label-focus-error': flagUser}" v-model="inputValue" :name="inputName" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' type="text" />
+            <input :class="{'label-focus': flagInput, 'label-focus-error': flagUser}" autocomplete="off" v-model="inputValue" :name="inputName" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' type="text" />
             <label :class="{'stop_move': flagTitleMove,'label-font-color': flagTitleColor, 'label-font-color-error': flagUser}" @click='$el.children[0].children[0].focus()'>{{ txt }}</label>
         </div>
         <div v-show="flagUser" class="alert alert-danger" role="alert">{{ tipValue }}</div>
@@ -12,7 +12,7 @@
 
 export default {
     name: 'InputItem',
-    props: ['inputType','txt','inputName'],
+    props: ['inputType','txt','inputName','passwordFirst'],
     data: function(){
         return {
             inputValue: '',
@@ -20,8 +20,7 @@ export default {
             flagInput: false,
             flagTitleColor: false,
             flagUser: false,
-            tipValue: "",
-            passwordFirst: ""
+            tipValue: ""
         }
     },
     methods: {
@@ -69,12 +68,12 @@ export default {
                         this.flagUser = false;
                         this.passwordFirst = this.inputValue;
                         this.$emit('inputPsd',this.inputValue);
-                        console.log(this.passwordFirst);
                     }
                 }
                 else if(this.inputName == "reg_password_again") {
                     // 输入确认密码
                     console.log(this.passwordFirst)
+                    this.$emit('inputUserName',this.inputValue);
                     if(this.inputValue != this.passwordFirst) {
                         this.flagUser = true;
                         this.tipValue = "两次密码不一致！";
