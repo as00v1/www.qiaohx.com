@@ -7,6 +7,7 @@ $white-color: #FFF;
 $color-blue: #1A73E8;
 $color-btn-hover: #4285F4;
 $font-color: #8B8B8B;
+$color-error: #A94442;
 
 // common.css
 input:-webkit-autofill,
@@ -21,10 +22,14 @@ button{
     // background: $white-color;border-radius: 5px;padding: 15px;
     background: rgba(216, 216, 216, 0);border-radius: 5px;padding: 15px;
 }
+.flex-box {
+    display: flex;justify-content: space-between;align-items: center;
+}
 .input-box__item {
-    margin: 10px;position: relative;padding-top: 5px;display: flex;justify-content: space-between;align-items: center;
+    margin: 10px;position: relative;padding-top: 5px;
+    // display: flex;justify-content: space-between;align-items: center;
     input {
-        height: 54px;width: 100%;outline: none;border: none; border: 1px solid #DCDCDC;padding: 0 10px;border-radius: 10px; font-size: 20px;
+        height: 54px;width: 100%;outline: none;border: none; border: 1px solid #DCDCDC;padding: 0 10px;border-radius: 4px; font-size: 20px;
     }
     label {
         display: inline-block;color: $font-color;position: absolute;left: 10px;top: 20px;cursor: text;transition: all 0.3s;padding: 0 5px;font-size: 17px;font-weight: 500
@@ -32,8 +37,14 @@ button{
     .label-focus {
         border: 2px solid $color-blue;
     }
+    .label-focus-error {
+        border: 2px solid $color-error;
+    }
     .label-font-color {
         color: $color-blue !important;
+    }
+    .label-font-color-error {
+        color: $color-error !important;
     }
     .stop_move {
         top: -3px;color: $font-color;
