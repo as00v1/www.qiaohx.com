@@ -15,7 +15,7 @@
             </div>
             <span slot="sign" class="navheader-title visible-xs-inline-block">
                 <router-link to="/Login">登录</router-link>
-                <router-link class="border-white" to="/Login">注册</router-link>
+                <router-link class="border-white" to="/SignUp">注册</router-link>
             </span>
         </NavHeader>
         <router-view/>

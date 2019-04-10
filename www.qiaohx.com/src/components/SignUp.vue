@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="row">
-        <Model :msg="this.msg"></Model>
+        <Model :tips="msg"></Model>
         <form class="main-box col-md-8 col-xs-12 col-sm-8">
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
@@ -64,7 +64,6 @@ export default {
     },
     methods: {
         inputFn($event,val) {
-            console.log(arguments)
             var indexInput = $event.inputName;
             if(indexInput == 0){
                 var that = this;
@@ -73,6 +72,7 @@ export default {
                     "loginCert": val
                 }).then(function (response) {
                     if(response.data.code == 0 && response.status == 200){
+                        that.username = val;
                         that.items[indexInput].flagUser = false;
                         that.items[indexInput].tipValue = "";
                     }
@@ -118,8 +118,8 @@ export default {
                 }).then(function (response) {
                     console.log(response)
                     if(response.data.code == 0 && response.status == 200){
-                        this.bol = true;
-                        this.msg = "注册成功";
+                        that.bol = true;
+                        that.msg = "注册成功";
                         // that.flagUser = false;
                         // 注册成功
                     }
