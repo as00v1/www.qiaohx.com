@@ -34,7 +34,7 @@ export default {
             else {
                 this.flagTitleMove = true;
                 // var that = this;
-                this.$emit('inputFn',this,this.inputValue,this.tipValue);
+                this.$emit('inputFn',this,this.inputValue);
             }
         }
     },
