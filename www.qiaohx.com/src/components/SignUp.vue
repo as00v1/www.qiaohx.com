@@ -1,6 +1,6 @@
 <template lang="html">
     <div class="row">
-        <Model :msg="this.msg"></Model>
+        <Model :tips="msg"></Model>
         <form class="main-box col-md-8 col-xs-12 col-sm-8">
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
@@ -64,7 +64,6 @@ export default {
     },
     methods: {
         inputFn($event,val) {
-            console.log(arguments)
             var indexInput = $event.inputName;
             if(indexInput == 0){
                 var that = this;
@@ -73,6 +72,7 @@ export default {
                     "loginCert": val
                 }).then(function (response) {
                     if(response.data.code == 0 && response.status == 200){
+                        that.username = val;
                         that.items[indexInput].flagUser = false;
                         that.items[indexInput].tipValue = "";
                     }
@@ -109,27 +109,36 @@ export default {
         },
         fn: function () {
             if(!this.common.isEmpty(this.username) && !this.common.isEmpty(this.password) && !this.common.isEmpty(this.password_again)) {
-                
-                var that = this;
-                this.$axios.post(this.$base.baseUrl + this.$base.registerUrl, {
-                    "certType": this.common.accountType(this.username),
-                    "loginCert": this.username,
-                    "password": this.$hex.hex_md5(this.password)
-                }).then(function (response) {
-                    console.log(response)
-                    if(response.data.code == 0 && response.status == 200){
-                        this.bol = true;
-                        this.msg = "注册成功";
-                        // that.flagUser = false;
-                        // 注册成功
-                    }
-                    else {
-                        that.flagUser = true;
-                        that.tipValue = "用户名已存在！";
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                if(this.password_again == this.password) {
+                    var that = this;
+                    this.$axios.post(this.$base.baseUrl + this.$base.registerUrl, {
+                        "certType": this.common.accountType(this.username),
+                        "loginCert": this.username,
+                        "password": this.$hex.hex_md5(this.password)
+                    }).then(function (response) {
+                        console.log(response)
+                        if(response.data.code == 0 && response.status == 200){
+                            that.bol = true;
+                            that.msg = "注册成功";
+                            // that.flagUser = false;
+                            // 注册成功
+                        }
+                        else {
+                            that.flagUser = true;
+                            that.tipValue = "用户名已存在！";
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+                else {
+                    this.bol = true;
+                    this.msg = "两次密码不一致";
+                }
+            }
+            else {
+                this.bol = true;
+                this.msg = "请将信息输入完整！";
             }
         }
     }
