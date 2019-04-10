@@ -6,8 +6,21 @@ function isEmpty(obj){
         return false;
     }
 }
-function test() {}
-export default {isEmpty, test}
+function accountType(val) {
+    if (/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(val)) {
+        return '01';
+    }
+    else if((/^1[34578]\d{9}$/.test(val))) {
+        return '02';
+    }
+    else if (/^[a-zA-Z]([-_a-zA-Z0-9]{5,19})+$/.test(val)) {
+        return '03';
+    }
+    else {
+        return '00';
+    }
+}
+export default {isEmpty, accountType}
 
 // 第二种导出方式（直接导出函数）
 

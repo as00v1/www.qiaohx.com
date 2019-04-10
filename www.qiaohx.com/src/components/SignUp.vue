@@ -1,63 +1,126 @@
 <template lang="html">
     <div class="row">
-        <div class="main-box col-md-8 col-xs-12 col-sm-8">
+        <Model :msg="this.msg"></Model>
+        <form class="main-box col-md-8 col-xs-12 col-sm-8">
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
                     <h3>注册</h3>
-                    <InputItem txt="请输入用户名" @inputUserName="getUserName" inputName="reg_username" inputType="text"></InputItem>
-                    <InputItem txt="请输入密码" @inputPsd="getPassword" inputName="reg_password" inputType="password"></InputItem>
-                    <InputItem txt="请再次输入密码" inputName="reg_password_again" inputType="password"></InputItem>
+                    <div v-for="(item,index) in items" :key="index">
+                        <InputItem :txt="item.inputTxt" :tipValue="item.tipValue" :flagUser="item.flagUser" @inputFn="inputFn" :inputName="index" :inputType="item.inputType"></InputItem>
+                        <!-- <InputItem :flagUser="flagUser" txt="请输入用户名" @inputFn="getUserName" inputName="reg_username" inputType="text"></InputItem>
+                        <InputItem :flagUser="flagUser" txt="请输入密码" @inputFn="getPassword" inputName="reg_password" inputType="password"></InputItem>
+                        <InputItem :flagUser="flagUser" txt="请再次输入密码" @inputFn="getPasswordAgain" inputName="reg_password_again" inputType="password"></InputItem> -->
+                    </div>
                     <div class="input-box__item flex-box">
                         <span><router-link to="/Login">已有账号？立即登录</router-link></span>
-                        <button type="button" @click="fn" class="btn btn-lg btn-primary">注册</button>
+                        <button type="button" data-toggle="modal" v-bind:data-target="bol ? '.bs-example-modal-sm' : '' " @click="fn" class="btn btn-lg btn-primary">注册</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
 <script>
+import Model from './model'
 import InputItem from '../pages/Form/InputItem'
 export default {
     name: 'SignUp',
     components: {
-        InputItem
+        InputItem,
+        Model
     },
     data() {
         return {
-            username: "",
-            password: "",
-            password_again: ""
+            msg: "",
+            bol: false,
+            username: "",          
+            password_again: "",
+            items: [
+                {
+                    inputTxt: "请输入用户名",
+                    inputName: "reg_username",
+                    inputType: "text",
+                    flagUser: false,
+                    tipValue: ""
+                },
+                {
+                    inputTxt: "请输入密码",
+                    inputName: "reg_password",
+                    inputType: "password",
+                    flagUser: false,
+                    tipValue: ""
+                },
+                {
+                    inputTxt: "请再次输入密码",
+                    inputName: "reg_password_again",
+                    inputType: "password",
+                    flagUser: false,
+                    tipValue: ""
+                }
+            ]
         }
     },
     methods: {
-        getUserName: function(value) {
-            this.username = value;
-            console.log("username:"+value)
-        },
-        getPassword: function(value) {
-            this.password = value;
-        },
-        fn: function () {
-            var that = this;
-            this.$axios.post(this.$base.baseUrl + this.$base.registerUrl, {
-                "certType": "00",
-                "loginCert": this.username,
-                "password": this.password
-            }).then(function (response) {
-                console.log(response)
-                if(response.data.code == 0 && response.status == 200){
-                    // that.flagUser = false;
-                    // 注册成功
+        inputFn($event,val,tips) {
+            console.log(arguments)
+            if($event.inputName == 0){
+                var that = this;
+                this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
+                    "certType": "00",
+                    "loginCert": val
+                }).then(function (response) {
+                    if(response.data.code == 0 && response.status == 200){
+                        that.items[$event.inputName].flagUser = false;
+                    }
+                    else {
+                        that.items[$event.inputName].flagUser = true;
+                        that.items[$event.inputName].tipValue = "用户名已存在！";
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else if($event.inputName == "1") {
+                if(val.length < 8) {
+                    this.items[$event.inputName].flagUser = true;
+                    this.items[$event.inputName].tipValue = "密码最少输入8位！";
                 }
                 else {
-                    that.flagUser = true;
-                    that.tipValue = "用户名已存在！";
+                    this.items[$event.inputName].flagUser = false;
                 }
-            }).catch(function (error) {
-                console.log(error);
-            });
+            }
+            else if ($event.inputName == "2") {
+                this.password_again = val;
+                if(val !== this.password_again) {
+                    this.items[$event.inputName].tipValue = "两次密码不一致";
+                }
+            }
+        },
+        fn: function () {
+            if(!this.common.isEmpty(this.username) && !this.common.isEmpty(this.password) && !this.common.isEmpty(this.password_again)) {
+                
+                var that = this;
+                this.$axios.post(this.$base.baseUrl + this.$base.registerUrl, {
+                    "certType": this.common.accountType(this.username),
+                    "loginCert": this.username,
+                    "password": this.$hex.hex_md5(this.password)
+                }).then(function (response) {
+                    console.log(response)
+                    if(response.data.code == 0 && response.status == 200){
+                        this.bol = true;
+                        this.msg = "注册成功";
+                        // that.flagUser = false;
+                        // 注册成功
+                    }
+                    else {
+                        that.flagUser = true;
+                        that.tipValue = "用户名已存在！";
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
         }
     }
 }

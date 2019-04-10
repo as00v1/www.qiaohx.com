@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import Model from '../../components/Model'
+import Model from '../../components/model'
 export default {
     name: 'ToolItem',
     data: function() {
