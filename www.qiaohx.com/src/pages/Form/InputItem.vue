@@ -1,10 +1,10 @@
 <template lang="html">
     <div class="input-box__item">
         <div>
-            <input :class="{'label-focus': flagInput, 'label-focus-error': flagUser}" autocomplete="off" v-model="inputValue" :name="inputName" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' type="text" />
-            <label :class="{'stop_move': flagTitleMove,'label-font-color': flagTitleColor, 'label-font-color-error': flagUser}" @click='$el.children[0].children[0].focus()'>{{ txt }}</label>
+            <input :class="{'label-focus': flagInputFocus, 'label-focus-error': flagUser}" autocomplete="off" v-model="inputValue" :name="inputName" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' type="text" />
+            <label :class="{'stop_move': flagTitleMove,'label-font-color': flagInputFocus, 'label-font-color-error': flagUser}" @click='$el.children[0].children[0].focus()'>{{ txt }}</label>
         </div>
-        <div v-show="flagUser" class="alert alert-danger" role="alert">{{ tipValue }}</div>
+        <div v-show="flagWarn" class="alert alert-danger" role="alert">{{ tipValue }}</div>
     </div>
 </template>
 
@@ -12,26 +12,24 @@
 
 export default {
     name: 'InputItem',
-    props: ['inputType','txt','inputName','passwordFirst'],
+    props: ['inputType','txt','inputName','flagWarn'],
     data: function(){
         return {
             inputValue: '',
             flagTitleMove: false,
-            flagInput: false,
-            flagTitleColor: false,
+            flagInputFocus: false,
             flagUser: false,
-            tipValue: ""
+            tipValue: "",
+            passwordFirst: ""
         }
     },
     methods: {
         fnFocus: function(){
             this.flagTitleMove = true;
-            this.flagInput = true;
-            this.flagTitleColor = true;
+            this.flagInputFocus = true;
         },
         fnBlur: function(e) {
-            this.flagInput = false;
-            this.flagTitleColor = false;
+            this.flagInputFocus = false;
             // 输入值为空
             if(this.common.isEmpty(this.inputValue)){
                 this.flagTitleMove = false;
@@ -72,20 +70,19 @@ export default {
                 }
                 else if(this.inputName == "reg_password_again") {
                     // 输入确认密码
-                    console.log(this.passwordFirst)
-                    this.$emit('inputUserName',this.inputValue);
-                    if(this.inputValue != this.passwordFirst) {
-                        this.flagUser = true;
-                        this.tipValue = "两次密码不一致！";
-                    }
+                    this.tipValue = "两次密码不一致！";
+                    this.$emit('inputPsdAgain',this.inputValue,this.tipValue);
+                    // if(this.inputValue != this.passwordFirst) {
+                    //     this.flagUser = true;
+                    //     this.tipValue = "两次密码不一致！";
+                    // }
                 }
             }
         }
     },
     mounted: function() {
         if(!this.common.isEmpty(this.inputValue)) {
-            this.flagInput = false;
-            this.flagTitleColor = false;
+            this.flagInputFocus = false;
             this.flagTitleMove = false;
         }
     }

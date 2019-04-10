@@ -5,10 +5,11 @@
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
                     <h3>注册</h3>
-                    <!-- <div v-for="(item,index) in items" :key="index"> -->
-                        <InputItem txt="请输入用户名" @inputUserName="getUserName" inputName="reg_username" inputType="text"></InputItem>
-                        <InputItem txt="请输入密码" @inputPsd="getPassword" inputName="reg_password" inputType="password"></InputItem>
-                        <InputItem txt="请再次输入密码" @inputPsdAgain="getPasswordAgain" inputName="reg_password_again" inputType="password"></InputItem>
+                    <!-- <div v-for="(item,index) in items" :key="index">
+                        <InputItem :txt="item.inputTxt" :inputMethod="item.inputMethod" :inputName="item.inputUserName" :inputType="item.inputType"></InputItem> -->
+                        <InputItem :flagWarn="flagWarn" txt="请输入用户名" @inputUserName="getUserName" inputName="reg_username" inputType="text"></InputItem>
+                        <InputItem :flagWarn="flagWarn" txt="请输入密码" @inputPsd="getPassword" inputName="reg_password" inputType="password"></InputItem>
+                        <InputItem :flagWarn="flagWarn" txt="请再次输入密码" @inputPsdAgain="getPasswordAgain" inputName="reg_password_again" inputType="password"></InputItem>
                     <!-- </div> -->
                     <div class="input-box__item flex-box">
                         <span><router-link to="/Login">已有账号？立即登录</router-link></span>
@@ -35,6 +36,8 @@ export default {
             bol: false,
             username: "",
             password: "",
+            tipValue: "",
+            flagWarn: false,
             password_again: "",
             items: [
                 {
@@ -42,21 +45,24 @@ export default {
                     inputEmit: "inputUserName",
                     inputEvent: "getUserName",
                     inputName: "reg_username",
-                    inputType: "text"
+                    inputType: "text",
+                    inputMethod: "getUserName"
                 },
                 {
                     inputTxt: "请输入密码",
                     inputEmit: "inputPsd",
                     inputEvent: "getPassword",
                     inputName: "reg_password",
-                    inputType: "password"
+                    inputType: "password",
+                    inputMethod: "getPassword"
                 },
                 {
                     inputTxt: "请再次输入密码",
                     inputEmit: "inputPsdAgain",
                     inputEvent: "getPasswordAgain",
                     inputName: "reg_password_again",
-                    inputType: "password"
+                    inputType: "password",
+                    inputMethod: "getPasswordAgain"
                 }
             ]
         }
@@ -64,16 +70,19 @@ export default {
     methods: {
         getUserName: function(value) {
             this.username = value;
-            console.log("username:"+value)
+            return value;
         },
         getPassword: function(value) {
             this.password = value;
+            return value;
         },
-        getPasswordAgain: function(val) {
+        getPasswordAgain: function(val,tips) {
             this.password_again = val;
-            console.log("======"+val)
-        }
-        ,
+            if(this.password !== this.password_again) {
+                this.flagWarn = true;
+                this.tipValue = tips;
+            }
+        },
         fn: function () {
             if(!this.common.isEmpty(this.username) && !this.common.isEmpty(this.password) && !this.common.isEmpty(this.password_again)) {
                 
