@@ -5,12 +5,12 @@
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
                     <h3>注册</h3>
-                    <!-- <div v-for="(item,index) in items" :key="index">
-                        <InputItem :txt="item.inputTxt" :inputMethod="item.inputMethod" :inputName="item.inputUserName" :inputType="item.inputType"></InputItem> -->
-                        <InputItem :flagWarn="flagWarn" txt="请输入用户名" @inputUserName="getUserName" inputName="reg_username" inputType="text"></InputItem>
-                        <InputItem :flagWarn="flagWarn" txt="请输入密码" @inputPsd="getPassword" inputName="reg_password" inputType="password"></InputItem>
-                        <InputItem :flagWarn="flagWarn" txt="请再次输入密码" @inputPsdAgain="getPasswordAgain" inputName="reg_password_again" inputType="password"></InputItem>
-                    <!-- </div> -->
+                    <div v-for="(item,index) in items" :key="index">
+                        <InputItem :txt="item.inputTxt" :tipValue="item.tipValue" :flagUser="item.flagUser" @inputFn="inputFn" :inputName="index" :inputType="item.inputType"></InputItem>
+                        <!-- <InputItem :flagUser="flagUser" txt="请输入用户名" @inputFn="getUserName" inputName="reg_username" inputType="text"></InputItem>
+                        <InputItem :flagUser="flagUser" txt="请输入密码" @inputFn="getPassword" inputName="reg_password" inputType="password"></InputItem>
+                        <InputItem :flagUser="flagUser" txt="请再次输入密码" @inputFn="getPasswordAgain" inputName="reg_password_again" inputType="password"></InputItem> -->
+                    </div>
                     <div class="input-box__item flex-box">
                         <span><router-link to="/Login">已有账号？立即登录</router-link></span>
                         <button type="button" data-toggle="modal" v-bind:data-target="bol ? '.bs-example-modal-sm' : '' " @click="fn" class="btn btn-lg btn-primary">注册</button>
@@ -34,53 +34,67 @@ export default {
         return {
             msg: "",
             bol: false,
-            username: "",
-            password: "",
-            tipValue: "",
-            flagWarn: false,
+            username: "",          
             password_again: "",
             items: [
                 {
                     inputTxt: "请输入用户名",
-                    inputEmit: "inputUserName",
-                    inputEvent: "getUserName",
                     inputName: "reg_username",
                     inputType: "text",
-                    inputMethod: "getUserName"
+                    flagUser: false,
+                    tipValue: ""
                 },
                 {
                     inputTxt: "请输入密码",
-                    inputEmit: "inputPsd",
-                    inputEvent: "getPassword",
                     inputName: "reg_password",
                     inputType: "password",
-                    inputMethod: "getPassword"
+                    flagUser: false,
+                    tipValue: ""
                 },
                 {
                     inputTxt: "请再次输入密码",
-                    inputEmit: "inputPsdAgain",
-                    inputEvent: "getPasswordAgain",
                     inputName: "reg_password_again",
                     inputType: "password",
-                    inputMethod: "getPasswordAgain"
+                    flagUser: false,
+                    tipValue: ""
                 }
             ]
         }
     },
     methods: {
-        getUserName: function(value) {
-            this.username = value;
-            return value;
-        },
-        getPassword: function(value) {
-            this.password = value;
-            return value;
-        },
-        getPasswordAgain: function(val,tips) {
-            this.password_again = val;
-            if(this.password !== this.password_again) {
-                this.flagWarn = true;
-                this.tipValue = tips;
+        inputFn($event,val,tips) {
+            console.log(arguments)
+            if($event.inputName == 0){
+                var that = this;
+                this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
+                    "certType": "00",
+                    "loginCert": val
+                }).then(function (response) {
+                    if(response.data.code == 0 && response.status == 200){
+                        that.items[$event.inputName].flagUser = false;
+                    }
+                    else {
+                        that.items[$event.inputName].flagUser = true;
+                        that.items[$event.inputName].tipValue = "用户名已存在！";
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else if($event.inputName == "1") {
+                if(val.length < 8) {
+                    this.items[$event.inputName].flagUser = true;
+                    this.items[$event.inputName].tipValue = "密码最少输入8位！";
+                }
+                else {
+                    this.items[$event.inputName].flagUser = false;
+                }
+            }
+            else if ($event.inputName == "2") {
+                this.password_again = val;
+                if(val !== this.password_again) {
+                    this.items[$event.inputName].tipValue = "两次密码不一致";
+                }
             }
         },
         fn: function () {

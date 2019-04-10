@@ -1,10 +1,10 @@
 <template lang="html">
     <div class="input-box__item">
         <div>
-            <input :class="{'label-focus': flagInputFocus, 'label-focus-error': flagUser}" autocomplete="off" v-model="inputValue" :name="inputName" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' type="text" />
+            <input :class="{'label-focus': flagInputFocus, 'label-focus-error': flagUser}" autocomplete="off" v-model="inputValue" :name="inputName" :type="inputType" @blur="fnBlur($event)" @focus='fnFocus' />
             <label :class="{'stop_move': flagTitleMove,'label-font-color': flagInputFocus, 'label-font-color-error': flagUser}" @click='$el.children[0].children[0].focus()'>{{ txt }}</label>
         </div>
-        <div v-show="flagWarn" class="alert alert-danger" role="alert">{{ tipValue }}</div>
+        <div v-show="flagUser" class="alert alert-danger" role="alert">{{ tipValue }}</div>
     </div>
 </template>
 
@@ -12,15 +12,12 @@
 
 export default {
     name: 'InputItem',
-    props: ['inputType','txt','inputName','flagWarn'],
+    props: ['inputType','txt','inputName','flagUser','tipValue'],
     data: function(){
         return {
             inputValue: '',
             flagTitleMove: false,
-            flagInputFocus: false,
-            flagUser: false,
-            tipValue: "",
-            passwordFirst: ""
+            flagInputFocus: false
         }
     },
     methods: {
@@ -36,47 +33,8 @@ export default {
             }
             else {
                 this.flagTitleMove = true;
-                var that = this;
-                if(this.inputName == "reg_username"){
-                    // 输入用户名
-                    // 用户名校验
-                    this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
-                        "certType": "00",
-                        "loginCert": this.inputValue
-                    }).then(function (response) {
-                        if(response.data.code == 0 && response.status == 200){
-                            that.flagUser = false;
-                            that.$emit('inputUserName',that.inputValue);
-                        }
-                        else {
-                            that.flagUser = true;
-                            that.tipValue = "用户名已存在！";
-                        }
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                }
-                else if(this.inputName == "reg_password") {
-                    // 输入密码
-                    if(this.inputValue.length < 8) {
-                        this.flagUser = true;
-                        this.tipValue = "密码最少输入8位！";
-                    }
-                    else {
-                        this.flagUser = false;
-                        this.passwordFirst = this.inputValue;
-                        this.$emit('inputPsd',this.inputValue);
-                    }
-                }
-                else if(this.inputName == "reg_password_again") {
-                    // 输入确认密码
-                    this.tipValue = "两次密码不一致！";
-                    this.$emit('inputPsdAgain',this.inputValue,this.tipValue);
-                    // if(this.inputValue != this.passwordFirst) {
-                    //     this.flagUser = true;
-                    //     this.tipValue = "两次密码不一致！";
-                    // }
-                }
+                // var that = this;
+                this.$emit('inputFn',this,this.inputValue,this.tipValue);
             }
         }
     },
