@@ -34,7 +34,8 @@ export default {
         return {
             msg: "",
             bol: false,
-            username: "",          
+            username: "",
+            password: "",
             password_again: "",
             items: [
                 {
@@ -62,38 +63,47 @@ export default {
         }
     },
     methods: {
-        inputFn($event,val,tips) {
+        inputFn($event,val) {
             console.log(arguments)
-            if($event.inputName == 0){
+            var indexInput = $event.inputName;
+            if(indexInput == 0){
                 var that = this;
                 this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
                     "certType": "00",
                     "loginCert": val
                 }).then(function (response) {
                     if(response.data.code == 0 && response.status == 200){
-                        that.items[$event.inputName].flagUser = false;
+                        that.items[indexInput].flagUser = false;
+                        that.items[indexInput].tipValue = "";
                     }
                     else {
-                        that.items[$event.inputName].flagUser = true;
-                        that.items[$event.inputName].tipValue = "用户名已存在！";
+                        that.items[indexInput].flagUser = true;
+                        that.items[indexInput].tipValue = "用户名已存在！";
                     }
                 }).catch(function (error) {
                     console.log(error);
                 });
             }
-            else if($event.inputName == "1") {
+            else if(indexInput == "1") {
                 if(val.length < 8) {
-                    this.items[$event.inputName].flagUser = true;
-                    this.items[$event.inputName].tipValue = "密码最少输入8位！";
+                    this.items[indexInput].flagUser = true;
+                    this.items[indexInput].tipValue = "密码最少输入8位！";
                 }
                 else {
-                    this.items[$event.inputName].flagUser = false;
+                    this.items[indexInput].flagUser = false;
+                    this.items[indexInput].tipValue = "";
+                    this.password = val;
                 }
             }
-            else if ($event.inputName == "2") {
+            else if (indexInput == "2") {
                 this.password_again = val;
-                if(val !== this.password_again) {
-                    this.items[$event.inputName].tipValue = "两次密码不一致";
+                if(val !== this.password) {
+                    this.items[indexInput].flagUser = true;
+                    this.items[indexInput].tipValue = "两次密码不一致";
+                }
+                else {
+                    this.items[indexInput].flagUser = false;
+                    this.items[indexInput].tipValue = "";
                 }
             }
         },
