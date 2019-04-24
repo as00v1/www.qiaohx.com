@@ -7,9 +7,6 @@
                     <h3>注册</h3>
                     <div v-for="(item,index) in items" :key="index">
                         <InputItem :txt="item.inputTxt" :tipValue="item.tipValue" :flagUser="item.flagUser" @inputFn="inputFn" :inputName="index" :inputType="item.inputType"></InputItem>
-                        <!-- <InputItem :flagUser="flagUser" txt="请输入用户名" @inputFn="getUserName" inputName="reg_username" inputType="text"></InputItem>
-                        <InputItem :flagUser="flagUser" txt="请输入密码" @inputFn="getPassword" inputName="reg_password" inputType="password"></InputItem>
-                        <InputItem :flagUser="flagUser" txt="请再次输入密码" @inputFn="getPasswordAgain" inputName="reg_password_again" inputType="password"></InputItem> -->
                     </div>
                     <div class="input-box__item flex-box">
                         <span><router-link to="/Login">已有账号？立即登录</router-link></span>
@@ -40,21 +37,21 @@ export default {
             items: [
                 {
                     inputTxt: "请输入用户名",
-                    inputName: "reg_username",
+                    inputName: "",
                     inputType: "text",
                     flagUser: false,
                     tipValue: ""
                 },
                 {
                     inputTxt: "请输入密码",
-                    inputName: "reg_password",
+                    inputName: "",
                     inputType: "password",
                     flagUser: false,
                     tipValue: ""
                 },
                 {
                     inputTxt: "请再次输入密码",
-                    inputName: "reg_password_again",
+                    inputName: "",
                     inputType: "password",
                     flagUser: false,
                     tipValue: ""
@@ -68,7 +65,7 @@ export default {
             if(indexInput == 0){
                 var that = this;
                 this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
-                    "certType": "00",
+                    "certType": this.common.accountType(val),
                     "loginCert": val
                 }).then(function (response) {
                     if(response.data.code == 0 && response.status == 200){
