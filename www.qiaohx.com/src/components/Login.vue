@@ -4,8 +4,11 @@
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
                     <h3>登录</h3>
-                    <InputItem txt="请输入用户名" inputType="text"></InputItem>
-                    <InputItem txt="请输入密码" inputType="password"></InputItem>
+                    <div v-for="(item,index) in items" :key="index">
+                        <InputItem :txt="item.inputTxt" :tipValue="item.tipValue" :flagUser="item.flagUser" @inputFn="inputFn" :inputName="index" :inputType="item.inputType"></InputItem>
+                    </div>
+                    <!-- <InputItem txt="请输入用户名" inputType="text"></InputItem>
+                    <InputItem txt="请输入密码" inputType="password"></InputItem> -->
                     <div class="input-box__item flex-box">
                         <span><router-link to="/SignUp">没有账号？立即注册</router-link></span>
                         <button type="button" @click="fn" class="btn btn-lg btn-primary">登录</button>
@@ -29,38 +32,95 @@ export default {
     data: function(){
         return {
             focus: false,
-            selectedName: ''
+            selectedName: '',
+            username: "",
+            password: "",
+            items: [
+                {
+                    inputTxt: "请输入用户名",
+                    inputName: "",
+                    inputType: "text",
+                    flagUser: false,
+                    tipValue: ""
+                },
+                {
+                    inputTxt: "请输入密码",
+                    inputName: "",
+                    inputType: "password",
+                    flagUser: false,
+                    tipValue: ""
+                }
+            ]
         }
     },
     methods: {
-        fn: function() {
-            // console.log()
-            // this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
-            //     "certType": "00",
-            //     "loginCert": this.inputValue
-            // }).then(function (response) {
-            //     if(response.data.code == 0 && response.status == 200){
-            //         that.flagUser = false;
+        inputFn($event,val) {
+            var indexInput = $event.inputName;
+            if(indexInput == 0){
+            //     this.$axios.post(this.$base.baseUrl + this.$base.signUpUrl, {
+            //         "certType": this.common.accountType(val),
+            //         "loginCert": val
+            //     }).then(function (response) {
+            //         if(response.data.code == 0 && response.status == 200){
+                        this.username = val;
+            //             that.items[indexInput].flagUser = false;
+            //             that.items[indexInput].tipValue = "";
+            //         }
+            //         else {
+            //             that.items[indexInput].flagUser = true;
+            //             that.items[indexInput].tipValue = "用户名已存在！";
+            //         }
+            //     }).catch(function (error) {
+            //         console.log(error);
+            //     });
+            }
+            else if(indexInput == "1") {
+                if(val.length < 8) {
+                    this.items[indexInput].flagUser = true;
+                    this.items[indexInput].tipValue = "密码最少输入8位！";
+                }
+                else {
+                    this.items[indexInput].flagUser = false;
+                    this.items[indexInput].tipValue = "";
+                    this.password = val;
+                }
+            }
+            // else if (indexInput == "2") {
+            //     this.password_again = val;
+            //     if(val !== this.password) {
+            //         this.items[indexInput].flagUser = true;
+            //         this.items[indexInput].tipValue = "两次密码不一致";
             //     }
             //     else {
-            //         that.flagUser = true;
-            //         that.tipValue = "用户名已存在！";
+            //         this.items[indexInput].flagUser = false;
+            //         this.items[indexInput].tipValue = "";
             //     }
-            // }).catch(function (error) {
-            //     console.log(error);
-            // });
+            // }
+        },
+        fn: function() {
+            console.log(this.username)
+            console.log(this.password)
+            var that = this;
+            this.$axios.post(this.$base.baseUrl + this.$base.loginUrl, {
+                "certType": this.common.accountType(this.username),
+                "loginCert": this.username,
+                "password": this.$hex.hex_md5(this.password)
+            }).then(function (response) {
+                console.log(response)
+                if(response.data.code == 0 && response.status == 200){
+                    
+                    that.flagUser = false;
+                }
+                else {
+                    that.flagUser = true;
+                    that.tipValue = "用户名已存在！";
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
         // 1、父组件可以使用 props 把数据传给子组件。
         // 2、子组件可以使用 $emit 触发父组件的自定义事件。
-        // fnFocus: function() {
-        //     this.focus = true;
-        // },
-        // fnBlur: function() {
-        //     this.focus = false;
-        // },
-        // getfocus: function(val) {
-        //     this.selectedName = val;
-        // }
     }
 }
 </script>
