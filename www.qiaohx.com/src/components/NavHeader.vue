@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="pull-right">
-                    <slot v-if="isLogin" name="sign"></slot>
+                    <slot name="sign"></slot>
                     <button type="button" class="navbar-toggle" data-toggle="collapse"
                         data-target="#example-navbar-collapse">
                         <span class="sr-only"></span>
@@ -15,7 +15,7 @@
                 <router-link class="navbar-brand active" :to="home">首页</router-link>
             </div>
             <div class="collapse navbar-collapse" id="example-navbar-collapse">
-                <slot v-if="isLogin" name="web"></slot>
+                <slot name="web"></slot>
             </div>
         </div>
     </div>
@@ -24,7 +24,6 @@
 <script>
 export default {
     name: 'NavHeader',
-    props: ["isLogin"],
     data() {
         return {
             home: '/home'
@@ -33,7 +32,7 @@ export default {
 }
 </script>
 <style media="screen">
-    .navbar {position: absolute;width: 100%;z-index: 2;top: 0;}
+    .navbar {position: fixed;width: 100%;z-index: 2;top: 0;}
 </style>
 
 <style lang="css" scoped>

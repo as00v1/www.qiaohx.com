@@ -32,6 +32,14 @@ export default {
         Model
         // InputItem
     },
+    computed: {
+        noLogin() {
+            return this.$store.state.isLogin;
+        },
+        certainLogin() {
+            return this.$store.getters.noLogin;
+        }
+    },
     data: function(){
         return {
             focus: false,
