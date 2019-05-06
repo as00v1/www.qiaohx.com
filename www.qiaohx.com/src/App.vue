@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <vueCanvasNest :config="{color:'0,0,0',opacity:1}"></vueCanvasNest>
-        <NavHeader>
+        <NavHeader :isLogin=true>
             <div class="" slot="web">
                 <ul class="nav navbar-nav">
                     <li v-for="item in list" v-bind:key="item.id">

@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Store from './store'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -15,7 +15,6 @@ import common from '@/assets/js/common'
 import md5 from '@/assets/js/md5'
 import * as baseUrl from '@/assets/js/baseUrl'
 
-Vue.use(Vuex);
 Vue.config.productionTip = false;
 
 Vue.prototype.common = common;
@@ -27,6 +26,7 @@ Vue.prototype.$base = baseUrl;
 new Vue({
   el: '#app',
   router,
+  Store,
   components: { App },
   template: '<App/>'
 })
