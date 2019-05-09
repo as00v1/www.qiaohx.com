@@ -12,21 +12,7 @@
                     <li><router-link to="/Login">登录</router-link></li>
                     <li><router-link class="border-white" to="/SignUp">注册</router-link></li>
                 </ul>
-                <!-- <div class="pull-right navheader-title hidden-xs">
-                    <router-link to="/Login">登录</router-link>
-                    <router-link class="border-white" to="/SignUp">注册</router-link>
-                </div> -->
-                <!-- <form class="navbar-right">
-                    <button type="submit" class="btn btn-default">
-                        注册
-                    </button>
-                    <a class="navbar-text navbar-right">登录</a>
-                </form> -->
             </div>
-            <!-- <span slot="sign" class="navheader-title visible-xs-inline-block">
-                <router-link to="/Login">登录</router-link>
-                <router-link class="border-white" to="/SignUp">注册</router-link>
-            </span> -->
         </NavHeader>
         <router-view/>
         <NavFooter></NavFooter>
@@ -50,9 +36,9 @@ export default {
   data() {
       return {
           list: [
-              {id: 0, text: "工具", link: '/tool'},
-              {id: 1, text: "牛奶",link: '/other'},
-              {id: 2, text: "蛋白质", link: '/personal'}
+              {id: 0, text: "编辑", link: '/EditOnline'},
+              {id: 1, text: "其他",link: '/other'},
+              {id: 2, text: "关于", link: '/personal'}
           ]
         // list: [
         //       {id: 0, text: "", link: '/tool'},

@@ -1,6 +1,9 @@
 <template lang="html">
     <footer>
-    	<p>Copyright &copy; {{ year() }}. www.qiaohx.com All rights reserved.</p>
+    	<p>
+            Copyright &copy; {{ year() }}. www.qiaohx.com All rights reserved.
+            <span> 京ICP备19014671号</span>
+        </p>
     </footer>
 </template>
 

@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Tool from '@/components/Tool'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
+import EditOnline from '@/components/EditOnline'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       name: 'SignUp',
       component: SignUp
     },
+    {
+      path: '/EditOnline',
+      name: 'EditOnline',
+      component: EditOnline
+    }
 
   ]
 })

@@ -4,6 +4,9 @@ $gradient-color-2: #07aa7F;
 // $end-color: #FEC8D8;
 $start-color: $gradient-color-2;
 $end-color: $gradient-color-1;
+#app {
+    margin-top: 60px;
+}
 .iconfont {
     font-size: 25px;
     color: #fff;
@@ -37,9 +40,6 @@ $end-color: $gradient-color-1;
     width: 100%;
     // background: url("../src/img/bg_beach.gif") no-repeat;
 
-}
-.home {
-    margin-top: 55px;
 }
 .navbar {
     margin-bottom: 0;
