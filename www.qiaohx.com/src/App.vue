@@ -24,6 +24,7 @@ import NavHeader from './components/NavHeader'
 import NavFooter from './components/NavFooter'
 import vueCanvasNest from 'vue-canvas-nest'
 import Login from './components/Login'
+import EditOnline from './components/EditOnline'
 
 export default {
   name: 'App',
@@ -31,7 +32,8 @@ export default {
     NavHeader,
     NavFooter,
     vueCanvasNest,
-    Login
+    Login,
+    EditOnline
   },
   data() {
       return {

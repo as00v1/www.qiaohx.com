@@ -140,11 +140,12 @@ export default {
                 this.bol = true;
                 this.msg = "请将信息输入完整！";
             }
+            
         }
     }
 }
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="scss" type="text/css" scoped>
     @import '~@/assets/css/login'
 </style>
