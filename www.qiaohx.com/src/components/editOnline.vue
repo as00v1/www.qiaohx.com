@@ -20,8 +20,8 @@ export default {
         type: Object,
         default() {
           return {
-            width: '88%',
-            height: '100%',
+            width: '100%',
+            height: 500,
             path: '../../static/MDeditor/lib/', // Autoload modules mode, codemirror, marked... dependents libs path
             codeFold: true,
             saveHTMLToTextarea: true,
