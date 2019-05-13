@@ -10,7 +10,7 @@
                     </div>
                     <div class="input-box__item flex-box">
                         <span><router-link to="/Login">已有账号？立即登录</router-link></span>
-                        <button type="button" data-toggle="modal" v-bind:data-target="bol ? '.bs-example-modal-sm' : '' " @click="fn" class="btn btn-lg btn-primary">注册</button>
+                        <button type="button" data-toggle="modal" v-bind:data-target="bol ? '.modal' : '' " @click="fn" class="btn btn-lg btn-primary">注册</button>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@ export default {
     data() {
         return {
             msg: "",
-            bol: false,
+            bol: true,
             username: "",
             password: "",
             password_again: "",
@@ -105,6 +105,8 @@ export default {
             }
         },
         fn: function () {
+            // this.bol = false;
+            this.msg = "";
             if(!this.common.isEmpty(this.username) && !this.common.isEmpty(this.password) && !this.common.isEmpty(this.password_again)) {
                 if(this.password_again == this.password) {
                     var that = this;
@@ -113,14 +115,15 @@ export default {
                         "loginCert": this.username,
                         "password": this.$hex.hex_md5(this.password)
                     }).then(function (response) {
+                        
                         console.log(response)
                         if(response.data.code == 0 && response.status == 200){
                             that.bol = true;
                             that.msg = "注册成功";
-                            // that.flagUser = false;
-                            // 注册成功
                         }
                         else {
+                            that.bol = true;
+                            that.msg = "用户名已存在";
                             that.flagUser = true;
                             that.tipValue = "用户名已存在！";
                         }
@@ -137,6 +140,7 @@ export default {
                 this.bol = true;
                 this.msg = "请将信息输入完整！";
             }
+            
         }
     }
 }

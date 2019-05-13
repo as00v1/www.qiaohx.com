@@ -1,6 +1,7 @@
 <template lang="html">
     <div class="row">
-        <div class="main-box col-md-8 col-xs-12 col-sm-8">
+        <Model :tips="msg"></Model>
+        <div class="main-box col-md-4 col-xs-12 col-sm-5">
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
                     <h3>登录</h3>
@@ -11,7 +12,7 @@
                     <InputItem txt="请输入密码" inputType="password"></InputItem> -->
                     <div class="input-box__item flex-box">
                         <span><router-link to="/SignUp">没有账号？立即注册</router-link></span>
-                        <button type="button" @click="fn" class="btn btn-lg btn-primary">登录</button>
+                        <button type="button" @click="fn" v-bind:data-target="bol ? '.modal' : '' " class="btn btn-lg btn-primary">登录</button>
                     </div>
                 </div>
             </div>
@@ -20,14 +21,24 @@
 </template>
 
 <script>
+import Model from './model'
 import InputItem from '../pages/Form/InputItem'
 export default {
     name: 'Login',
     components: {
         // 子传父：   $emit
         // 父传子：   props
-        InputItem
+        InputItem,
+        Model
         // InputItem
+    },
+    computed: {
+        noLogin() {
+            return this.$store.state.isLogin;
+        },
+        certainLogin() {
+            return this.$store.getters.noLogin;
+        }
     },
     data: function(){
         return {
@@ -35,6 +46,8 @@ export default {
             selectedName: '',
             username: "",
             password: "",
+            msg: "登录成功",
+            bol: true,
             items: [
                 {
                     inputTxt: "请输入用户名",
@@ -75,15 +88,15 @@ export default {
             //     });
             }
             else if(indexInput == "1") {
-                if(val.length < 8) {
-                    this.items[indexInput].flagUser = true;
-                    this.items[indexInput].tipValue = "密码最少输入8位！";
-                }
-                else {
-                    this.items[indexInput].flagUser = false;
-                    this.items[indexInput].tipValue = "";
+                // if(val.length < 8) {
+                //     this.items[indexInput].flagUser = true;
+                //     this.items[indexInput].tipValue = "密码最少输入8位！";
+                // }
+                // else {
+                //     this.items[indexInput].flagUser = false;
+                //     this.items[indexInput].tipValue = "";
                     this.password = val;
-                }
+                // }
             }
             // else if (indexInput == "2") {
             //     this.password_again = val;
@@ -108,13 +121,21 @@ export default {
             }).then(function (response) {
                 console.log(response)
                 if(response.data.code == 0 && response.status == 200){
-                    
+                    that.bol = true;
                     that.flagUser = false;
+                    that.tipValue = "登录成功";
+                    localStorage.cid = response.data.cid;
                 }
-                else {
+                else if(response.data.code == 1003 && response.status == 200){
                     that.flagUser = true;
-                    that.tipValue = "用户名已存在！";
+                    
+                    that.bol = true;
+                    that.tipValue = response.data.errMsg;
                 }
+                // else {
+                //     that.flagUser = true;
+                //     that.tipValue = response.data.errMsg;
+                // }
             }).catch(function (error) {
                 console.log(error);
             });
