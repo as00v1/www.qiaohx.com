@@ -20,7 +20,7 @@ export default {
         type: Object,
         default() {
           return {
-            width: '100%',
+            width: '90%',
             height: 500,
             path: '../../static/MDeditor/lib/', // Autoload modules mode, codemirror, marked... dependents libs path
             codeFold: true,
