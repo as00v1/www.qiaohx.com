@@ -6,8 +6,6 @@
 
 <script>
 import $s from "scriptjs";
-// import { defaultConfig } from "../../config/editor.md";
-// import CodeMirror from "CodeMirror";
 
 export default {
     name: 'EditDocMainEditor',

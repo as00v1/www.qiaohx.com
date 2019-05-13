@@ -388,3 +388,9 @@ footer a {
 	} */
 }
 /*--/responsive--*/
+.border-bottom {
+    border-bottom: 1px #F0F2F7 solid;
+}
+.noborder {
+    border: 0;
+}
