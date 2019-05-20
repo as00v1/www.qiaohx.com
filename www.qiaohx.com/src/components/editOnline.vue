@@ -12,6 +12,9 @@
               <li><a href="#">新建Markdown</a></li>
           </ul>
       </div>
+      <div class="btn-group">
+          <button type="button" :click="btnSaveArticle()" class="btn btn-default dropdown-toggle" aria-expanded="false">保存</button>
+      </div>
       <div id="editor-md" class="main-editor">
         <textarea></textarea>
       </div>
@@ -42,9 +45,6 @@ export default {
             emoji: true,
             taskList: true,
             tocm: true,                  // Using [TOCM]
-            // tex: true,                   // 开启科学公式TeX语言支持，默认关闭
-            // flowChart: true,             // 开启流程图支持，默认关闭
-            // sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
             imageUpload: true,
             imageFormats: ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'],
             // imageUploadURL: 'examples/php/upload.php',
@@ -64,10 +64,8 @@ export default {
     created() {
     },
     mounted() {
-      // async loading js dependencies
-      // editormd depdend on jquery and zepto
       $s([
-        // `${this.editorPath}jquery.min.js`,
+        `${this.editorPath}jquery.min.js`,
         `${this.editorPath}zepto.min.js`,
       ], () => {
         $s(`${this.editorPath}MDeditor/editormd.min.js`, () => {
@@ -79,16 +77,26 @@ export default {
     },
     methods: {
       initEditor() {
-        // eslint-disable-next-line
         this.$nextTick((editorMD = window.editormd) => {
           if (editorMD) {
-            // Vue 异步执行 DOM 更新，template 里面的 script 标签异步创建
-            // 所以，只能在 nextTick 里面初始化 editor.md
             this.instance = editorMD('editor-md', this.editorConfig);
           }
         });
       },
-    },
+      btnSaveArticle() {
+        this.$axios.post(this.$base.baseUrl + this.$base.articleAddUrl, {
+            "cid": "用户标识*",
+            "content": "文章内容*",
+            "groupId": "分组Id*",
+            "keyWord": "关键词",
+            "title": "文章标题*"
+        }).then(function (response) {
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+      }
+    }
   };
 </script>
 
