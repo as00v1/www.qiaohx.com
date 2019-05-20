@@ -1,7 +1,20 @@
 <template lang="html">
-    <div id="editor-md" class="main-editor">
+    <div class="container">
+      <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            新建
+              <span class="caret"></span>
+              <!-- <span class="sr-only">切换下拉菜单</span> -->
+          </button>
+          <ul class="dropdown-menu" role="menu">
+              <li><a href="#">新建文档</a></li>
+              <li class="divider"></li>
+              <li><a href="#">新建Markdown</a></li>
+          </ul>
+      </div>
+      <div id="editor-md" class="main-editor">
         <textarea></textarea>
-        <!-- m18837123805@163.com-->
+      </div>
     </div>
 </template>
 
@@ -19,7 +32,7 @@ export default {
         type: Object,
         default() {
           return {
-            width: '90%',
+            width: '100%',
             height: 500,
             path: '../../static/MDeditor/lib/', // Autoload modules mode, codemirror, marked... dependents libs path
             codeFold: true,
