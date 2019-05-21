@@ -141,5 +141,5 @@ export default {
 </script>
 
 <style lang="scss" type="text/css">
-    @import '~@/assets/css/style';
+    // @import '~@/assets/css/style';
 </style>

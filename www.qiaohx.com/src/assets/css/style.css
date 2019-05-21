@@ -115,7 +115,7 @@ button {
     cursor: pointer;
     outline: none;
     color: white;
-    display: block;
+    /* display: block; */
 }
 .social-icons {
     text-align:center;

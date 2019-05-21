@@ -155,6 +155,14 @@
             "undo", "redo", "|",
             "watch", "preview", "|",
             "help", "info"
+        ],
+        customize : [
+            "undo", "redo", "|", 
+            "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+            "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+            "list-ul", "list-ol", "hr", "|",
+            "link", "reference-link", "image", "code", "code-block", "table", "datetime", "html-entities", "pagebreak", "|",
+            "goto-line", "watch", "preview", "clear", "search"
         ]
     };
     
@@ -382,7 +390,8 @@
                     selectDefaultText : "请选择代码语言",
                     otherLanguage     : "其他语言",
                     unselectedLanguageAlert : "错误：请选择代码所属的语言类型。",
-                    codeEmptyAlert    : "错误：请填写代码内容。"
+                    codeEmptyAlert    : "错误：请填写代码内容。",
+                    placeholder       : "coding now...."
                 },
                 htmlEntities : {
                     title : "HTML 实体字符"

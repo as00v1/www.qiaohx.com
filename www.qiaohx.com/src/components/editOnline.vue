@@ -15,6 +15,9 @@
       <div class="btn-group">
           <button type="button" :click="btnSaveArticle()" class="btn btn-default dropdown-toggle" aria-expanded="false">保存</button>
       </div>
+      <div>
+        
+      </div>
       <div id="editor-md" class="main-editor">
         <textarea></textarea>
       </div>
@@ -42,8 +45,8 @@ export default {
             saveHTMLToTextarea: true,
             searchReplace: true,
             htmlDecode: 'style,script,iframe|on*',
-            emoji: true,
             taskList: true,
+            toolbarIcons: 'customize',
             tocm: true,                  // Using [TOCM]
             imageUpload: true,
             imageFormats: ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'],
@@ -88,10 +91,10 @@ export default {
             "cid": "用户标识*",
             "content": "文章内容*",
             "groupId": "分组Id*",
-            "keyWord": "关键词",
+            "keyWord": "",
             "title": "文章标题*"
         }).then(function (response) {
-
+          console.log(response)
         }).catch(function (error) {
             console.log(error);
         });

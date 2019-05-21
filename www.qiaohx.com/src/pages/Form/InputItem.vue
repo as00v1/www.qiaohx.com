@@ -5,7 +5,7 @@
             <label :class="{'stop_move': flagTitleMove,'label-font-color': flagInputFocus, 'label-font-color-error': flagUser}" @click='$el.children[0].children[0].focus()'>{{ txt }}</label>
         </div>
         <div v-show="flagUser" class="alert alert-danger" role="alert">{{ tipValue }}</div>
-    </div>
+    </div>  
 </template>
 
 <script>
