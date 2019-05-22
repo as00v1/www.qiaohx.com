@@ -32,7 +32,7 @@ export default {
 }
 </script>
 <style media="screen">
-    .navbar {position: fixed;width: 100%;z-index: 2;top: 0;}
+    .navbar {position: fixed;width: 100%;z-index: 20;top: 0;}
 </style>
 
 <style lang="css" scoped>

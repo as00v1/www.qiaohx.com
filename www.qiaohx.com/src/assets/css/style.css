@@ -392,5 +392,5 @@ footer a {
     border-bottom: 1px #F0F2F7 solid;
 }
 .noborder {
-    border: 0;
+    border: 0 !important;
 }

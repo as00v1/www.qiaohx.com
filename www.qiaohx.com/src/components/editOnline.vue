@@ -1,23 +1,37 @@
 <template lang="html">
     <div class="container">
-      <div class="btn-group">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            新建
-              <span class="caret"></span>
-              <!-- <span class="sr-only">切换下拉菜单</span> -->
-          </button>
-          <ul class="dropdown-menu" role="menu">
-              <li><a href="#">新建文档</a></li>
-              <li class="divider"></li>
-              <li><a href="#">新建Markdown</a></li>
-          </ul>
-      </div>
-      <div class="btn-group">
+      <p>
+          <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                新建
+                  <span class="caret"></span>
+                  <!-- <span class="sr-only">切换下拉菜单</span> -->
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">新建文档</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">新建Markdown</a></li>
+              </ul>
+          </div>
           <button type="button" :click="btnSaveArticle()" class="btn btn-default dropdown-toggle" aria-expanded="false">保存</button>
+      </p>
+      
+      <div class="input-group">
+          <span class="input-group-addon">标题</span>
+          <input type="text" class="form-control" placeholder="无标题">
       </div>
-      <div>
-        
+      <br/>
+      <div class="form-inline">
+        <div class="input-group">
+          <label class="input-group-addon" for="groupname">分组</label>
+          <input type="text" class="form-control" id="groupname" placeholder="">
+        </div>
+        <div class="input-group">
+          <label class="input-group-addon" for="keyword">关键字</label>
+          <input type="text" class="form-control" id="keyword" placeholder="">
+        </div>
       </div>
+      <br/>
       <div id="editor-md" class="main-editor">
         <textarea></textarea>
       </div>
