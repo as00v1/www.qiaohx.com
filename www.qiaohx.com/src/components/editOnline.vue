@@ -1,7 +1,40 @@
 <template lang="html">
-    <div id="editor-md" class="main-editor">
+    <div class="container">
+      <p>
+          <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                新建
+                  <span class="caret"></span>
+                  <!-- <span class="sr-only">切换下拉菜单</span> -->
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">新建文档</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">新建Markdown</a></li>
+              </ul>
+          </div>
+          <button type="button" :click="btnSaveArticle()" class="btn btn-default dropdown-toggle" aria-expanded="false">保存</button>
+      </p>
+      
+      <div class="input-group">
+          <span class="input-group-addon">标题</span>
+          <input type="text" class="form-control" placeholder="无标题">
+      </div>
+      <br/>
+      <div class="form-inline">
+        <div class="input-group">
+          <label class="input-group-addon" for="groupname">分组</label>
+          <input type="text" class="form-control" id="groupname" placeholder="">
+        </div>
+        <div class="input-group">
+          <label class="input-group-addon" for="keyword">关键字</label>
+          <input type="text" class="form-control" id="keyword" placeholder="">
+        </div>
+      </div>
+      <br/>
+      <div id="editor-md" class="main-editor">
         <textarea></textarea>
-        <!-- m18837123805@163.com-->
+      </div>
     </div>
 </template>
 
@@ -19,19 +52,16 @@ export default {
         type: Object,
         default() {
           return {
-            width: '90%',
+            width: '100%',
             height: 500,
             path: '../../static/MDeditor/lib/', // Autoload modules mode, codemirror, marked... dependents libs path
             codeFold: true,
             saveHTMLToTextarea: true,
             searchReplace: true,
             htmlDecode: 'style,script,iframe|on*',
-            emoji: true,
             taskList: true,
+            toolbarIcons: 'customize',
             tocm: true,                  // Using [TOCM]
-            // tex: true,                   // 开启科学公式TeX语言支持，默认关闭
-            // flowChart: true,             // 开启流程图支持，默认关闭
-            // sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
             imageUpload: true,
             imageFormats: ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'],
             // imageUploadURL: 'examples/php/upload.php',
@@ -51,10 +81,8 @@ export default {
     created() {
     },
     mounted() {
-      // async loading js dependencies
-      // editormd depdend on jquery and zepto
       $s([
-        // `${this.editorPath}jquery.min.js`,
+        `${this.editorPath}jquery.min.js`,
         `${this.editorPath}zepto.min.js`,
       ], () => {
         $s(`${this.editorPath}MDeditor/editormd.min.js`, () => {
@@ -66,16 +94,26 @@ export default {
     },
     methods: {
       initEditor() {
-        // eslint-disable-next-line
         this.$nextTick((editorMD = window.editormd) => {
           if (editorMD) {
-            // Vue 异步执行 DOM 更新，template 里面的 script 标签异步创建
-            // 所以，只能在 nextTick 里面初始化 editor.md
             this.instance = editorMD('editor-md', this.editorConfig);
           }
         });
       },
-    },
+      btnSaveArticle() {
+        this.$axios.post(this.$base.baseUrl + this.$base.articleAddUrl, {
+            "cid": "用户标识*",
+            "content": "文章内容*",
+            "groupId": "分组Id*",
+            "keyWord": "",
+            "title": "文章标题*"
+        }).then(function (response) {
+          console.log(response)
+        }).catch(function (error) {
+            console.log(error);
+        });
+      }
+    }
   };
 </script>
 

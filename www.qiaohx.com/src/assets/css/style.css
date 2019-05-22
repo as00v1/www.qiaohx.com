@@ -106,7 +106,7 @@ button {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 4px;
-    margin: 35px auto;
+    /* margin: 35px auto; */
     padding: 10px;
     /* width: 25%; */
     box-sizing: border-box;
@@ -115,7 +115,7 @@ button {
     cursor: pointer;
     outline: none;
     color: white;
-    display: block;
+    /* display: block; */
 }
 .social-icons {
     text-align:center;
@@ -392,5 +392,5 @@ footer a {
     border-bottom: 1px #F0F2F7 solid;
 }
 .noborder {
-    border: 0;
+    border: 0 !important;
 }

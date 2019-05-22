@@ -14,7 +14,7 @@
                 </ul>
             </div>
         </NavHeader>
-        <router-view/>
+        <div class="container-fluid"><router-view/></div>
         <NavFooter></NavFooter>
     </div>
 </template>

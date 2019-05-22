@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="row">
         <Model :tips="msg"></Model>
-        <form class="main-box col-md-8 col-xs-12 col-sm-8">
+        <form class="main-box col-md-6 col-xs-12 col-sm-6 col-md-offset-3 col-sm-offset-3">
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
                     <h3>注册</h3>
