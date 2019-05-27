@@ -20,7 +20,18 @@ function accountType(val) {
         return '00';
     }
 }
-export default {isEmpty, accountType}
+function popup(n) {
+    $(".popup" + n).fadeIn()
+    var num = 0;
+    var timer = setInterval(function() {
+        num++
+        if(num >= 2) {
+            $(".popup" + n).fadeOut()
+            clearInterval(timer)
+        }
+    }, 1000)
+}
+export default {isEmpty, accountType, popup}
 
 // 第二种导出方式（直接导出函数）
 

@@ -20,6 +20,11 @@ export default {
             flagInputFocus: false
         }
     },
+    // watch: {
+    //     flagUser() {
+    //         return this.flagUser;
+    //     }
+    // },
     methods: {
         fnFocus: function(){
             this.flagTitleMove = true;

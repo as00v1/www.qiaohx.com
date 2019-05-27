@@ -15,7 +15,7 @@
             </div>
         </NavHeader>
         <div class="container-fluid"><router-view/></div>
-        <NavFooter></NavFooter>
+        <NavFooter class="hidden-xs hidden-sm"></NavFooter>
     </div>
 </template>
 
