@@ -1,6 +1,5 @@
 <template lang="html">
     <div class="row">
-        <Model v-show="bol" :tips="msg"></Model>
         <div class="main-box col-md-6 col-xs-12 col-sm-6 col-md-offset-3 col-sm-offset-3">
             <div class="row login-box">
                 <div class="col-md-10 col-md-offset-1">
@@ -10,11 +9,12 @@
                     </div>
                     <div class="input-box__item flex-box">
                         <span><router-link to="/SignUp">没有账号？立即注册</router-link></span>
-                        <button type="button" @click="fn"  class="btn btn-lg btn-primary">登录</button>
+                        <button type="button" @click="fn" :data-target="bol ? '.modal' : '' " class="btn btn-lg btn-primary">登录</button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- <Model v-show="bol" :tips="msg"></Model> -->
         <Popup v-show="popFlag" :msg='popMsg'></Popup>
     </div>
 </template>
@@ -100,9 +100,16 @@ export default {
             }).then(function (response) {
                 console.log(response)
                 if(response.data.code == 0 && response.status == 200){
-                    that.bol = true;
-                    that.items[1].flagUser = false;
-                    localStorage.cid = response.data.cid;
+                    // that.bol = true;
+                    // that.items[1].flagUser = false;
+                    // localStorage.cid = response.data.cid;
+                    that.$store.commit('ADD_COUNT', response.data.cid);
+                    console.log(that.$store.state)
+
+                    // let clock = window.setInterval(() => {
+
+                    // })
+                    that.$router.push('/')
                 }
                 else if(response.data.code == 1003 && response.status == 200){
                     that.bol = false;

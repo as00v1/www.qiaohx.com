@@ -8,9 +8,15 @@
                         <router-link class="text-right" v-bind:to="item.link">{{ item.text }}</router-link>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul v-if="!isLogin" class="nav navbar-nav navbar-right">
                     <li><router-link to="/Login">登录</router-link></li>
                     <li><router-link class="border-white" to="/SignUp">注册</router-link></li>
+                    <li><router-link class="border-white" @click="logOut" to="">退出</router-link></li>
+                </ul>
+                <ul v-if="isLogin" class="nav navbar-nav navbar-right">
+                    <li><router-link to="/Login">登录</router-link></li>
+                    <li><router-link class="border-white" to="/SignUp">注册</router-link></li>
+                    <!-- <li><router-link class="border-white" @click="logOut" to="">退出</router-link></li> -->
                 </ul>
             </div>
         </NavHeader>
@@ -41,12 +47,21 @@ export default {
               {id: 0, text: "编辑", link: '/EditOnline'},
               {id: 1, text: "其他",link: '/other'},
               {id: 2, text: "关于", link: '/personal'}
-          ]
+          ],
+          isLogin: false
         // list: [
         //       {id: 0, text: "", link: '/tool'},
         //       {id: 1, text: "",link: '/other'},
         //       {id: 2, text: "", link: '/personal'}
         //   ]
+      }
+  },
+  methods: {
+      logOut() {
+          console.log(this.$store.state.token)
+          this.$store.commit('REMOVE_COUNT', this.$store.state.token);
+          console.log(this.$store.state.token)
+          that.$router.push('/Login')
       }
   }
 }
