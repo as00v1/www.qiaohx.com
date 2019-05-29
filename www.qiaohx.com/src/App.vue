@@ -11,12 +11,26 @@
                 <ul v-if="!isLogin" class="nav navbar-nav navbar-right">
                     <li><router-link to="/Login">登录</router-link></li>
                     <li><router-link class="border-white" to="/SignUp">注册</router-link></li>
-                    <li><router-link class="border-white" @click="logOut" to="">退出</router-link></li>
                 </ul>
                 <ul v-if="isLogin" class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="./assets/images/lazy-pig.jpg" alt="l" class="img-circle img-photo">
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
                     <li><router-link to="/Login">登录</router-link></li>
                     <li><router-link class="border-white" to="/SignUp">注册</router-link></li>
-                    <!-- <li><router-link class="border-white" @click="logOut" to="">退出</router-link></li> -->
+                    <li><a class="border-white" @click="logOut">退出</a></li>
                 </ul>
             </div>
         </NavHeader>
@@ -47,13 +61,12 @@ export default {
               {id: 0, text: "编辑", link: '/EditOnline'},
               {id: 1, text: "其他",link: '/other'},
               {id: 2, text: "关于", link: '/personal'}
-          ],
-          isLogin: false
-        // list: [
-        //       {id: 0, text: "", link: '/tool'},
-        //       {id: 1, text: "",link: '/other'},
-        //       {id: 2, text: "", link: '/personal'}
-        //   ]
+          ]
+      }
+  },
+  computed: {
+      isLogin() {
+          return this.$store.state.isLogin;
       }
   },
   methods: {
@@ -61,7 +74,7 @@ export default {
           console.log(this.$store.state.token)
           this.$store.commit('REMOVE_COUNT', this.$store.state.token);
           console.log(this.$store.state.token)
-          that.$router.push('/Login')
+          this.$router.push('/Login')
       }
   }
 }
@@ -69,3 +82,7 @@ export default {
 <style lang="scss" type="text/css">
     @import '~@/assets/css/index';
 </style>
+<style scoped>
+    .img-photo {width: 24px; height: 24px;}
+</style>
+

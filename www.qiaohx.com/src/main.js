@@ -30,7 +30,7 @@ const REMOVE_COUNT = 'REMOVE_COUNT';
 
 const store = new Vuex.Store({
     state: {
-        isLogin: true,
+        isLogin: false,
         editor: {
             goEdit: true,
             isEditing: true
@@ -45,11 +45,13 @@ const store = new Vuex.Store({
         [ADD_COUNT] (state, token) {
             sessionStorage.setItem("token",token);
             state.token = token;
+            state.isLogin = true;
         },
         [REMOVE_COUNT] (state, token) {
             // 退出登录
             sessionStorage.removeItem("token",token);
             state.token = token;
+            state.isLogin = false;
         }
     },
     getters: {
