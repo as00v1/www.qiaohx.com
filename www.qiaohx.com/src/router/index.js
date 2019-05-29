@@ -38,7 +38,10 @@ export default new Router({
     {
       path: '/EditOnline',
       name: 'EditOnline',
-      component: EditOnline
+      component: EditOnline,
+      meta: {
+        requireAuth: true
+      }
     }
 
   ]
