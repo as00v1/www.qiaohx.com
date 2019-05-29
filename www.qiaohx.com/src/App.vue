@@ -9,8 +9,8 @@
                     </li>
                 </ul>
                 <ul v-if="!isLogin" class="nav navbar-nav navbar-right">
-                    <li><router-link to="/Login">登录</router-link></li>
-                    <li><router-link class="border-white" to="/SignUp">注册</router-link></li>
+                    <li><router-link to="/Login" class="login-item">登录</router-link></li>
+                    <li><router-link class="login-item border-white" to="/SignUp">注册</router-link></li>
                 </ul>
                 <ul v-if="isLogin" class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -19,18 +19,15 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">jmeter</a></li>
+                            <!-- <li><a href="#">jmeter</a></li>
                             <li><a href="#">EJB</a></li>
                             <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li> -->
+                            <li><a href="#">设置</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">分离的链接</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">另一个分离的链接</a></li>
+                            <li><a href="#" @click="logOut">退出</a></li>
                         </ul>
                     </li>
-                    <li><router-link to="/Login">登录</router-link></li>
-                    <li><router-link class="border-white" to="/SignUp">注册</router-link></li>
-                    <li><a class="border-white" @click="logOut">退出</a></li>
                 </ul>
             </div>
         </NavHeader>

@@ -9,12 +9,12 @@
                     </div>
                     <div class="input-box__item flex-box">
                         <span><router-link to="/SignUp">没有账号？立即注册</router-link></span>
-                        <button type="button" @click="fn" :data-target="bol ? '.modal' : '' " class="btn btn-lg btn-primary">登录</button>
+                        <button type="button" @click="fn" class="btn btn-lg btn-primary">登录</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <Model v-show="bol" :tips="msg"></Model> -->
+        <Model :tips="msg"></Model>
         <Popup v-show="popFlag" :msg='popMsg'></Popup>
     </div>
 </template>
@@ -48,7 +48,7 @@ export default {
             username: "",
             password: "",
             msg: "登录成功",
-            bol: true,
+            bol: false,
             popMsg: "网络错误",
             popFlag: false,
             items: [
@@ -75,6 +75,9 @@ export default {
         },
         bol() {
             return this.bol;
+        },
+        msg() {
+            return this.msg;
         }
         // items() {
         //     deep: true;
@@ -93,6 +96,12 @@ export default {
         },
         fn: function() {
             var that = this;
+            if(this.common.isEmpty(this.username) || this.common.isEmpty(this.password)) {
+                this.popFlag = true;
+                this.popMsg = "请输入用户名和密码"
+                this.$options.methods.popup(that);
+                return;
+            }
             this.$axios.post(this.$base.baseUrl + this.$base.loginUrl, {
                 "certType": this.common.accountType(this.username),
                 "loginCert": this.username,
