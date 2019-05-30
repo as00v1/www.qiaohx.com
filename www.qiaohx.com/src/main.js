@@ -43,27 +43,24 @@ const store = new Vuex.Store({
         // 组件中采用 this.$store.commit('方法名') 的方式调用，充分显示解耦
         // 内部操作必须在此刻完成（同步）
         [ADD_COUNT] (state, token) {
-            sessionStorage.setItem("token",token);
+            localStorage.setItem("token",token);
             state.token = token;
-            state.isLogin = true;
         },
         [REMOVE_COUNT] (state, token) {
             // 退出登录
-            sessionStorage.removeItem("token",token);
+            localStorage.removeItem("token",token);
             state.token = token;
-            state.isLogin = false;
         }
     },
     getters: {
         certainLogin() {
-            var noLogin = false;
-            return noLogin;
+            return !common.isEmpty(store.state.token);
         }
     }
 });
 
 router.beforeEach((to, from, next) => {
-    store.state.token = sessionStorage.getItem('token');
+    store.state.token = localStorage.getItem('token');
     // 获取本地存储的token
 
     if(to.meta.requireAuth) {

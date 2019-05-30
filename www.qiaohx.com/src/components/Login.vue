@@ -14,7 +14,6 @@
                 </div>
             </div>
         </div>
-        <Model :tips="msg"></Model>
         <Popup v-show="popFlag" :msg='popMsg'></Popup>
     </div>
 </template>
@@ -79,10 +78,6 @@ export default {
         msg() {
             return this.msg;
         }
-        // items() {
-        //     deep: true;
-        //     return this.items;
-        // }
     },
     methods: {
         inputFn($event,val) {
@@ -100,33 +95,23 @@ export default {
                 this.popFlag = true;
                 this.popMsg = "请输入用户名和密码"
                 this.$options.methods.popup(that);
-                return;
+                return false;
             }
             this.$axios.post(this.$base.baseUrl + this.$base.loginUrl, {
                 "certType": this.common.accountType(this.username),
                 "loginCert": this.username,
                 "password": this.$hex.hex_md5(this.password)
             }).then(function (response) {
-                console.log(response)
                 if(response.data.code == 0 && response.status == 200){
-                    // that.bol = true;
-                    // that.items[1].flagUser = false;
-                    // localStorage.cid = response.data.cid;
                     that.$store.commit('ADD_COUNT', response.data.cid);
-                    console.log(that.$store.state)
-
-                    // let clock = window.setInterval(() => {
-
-                    // })
                     that.$router.push('/')
                 }
-                else if(response.data.code == 1003 && response.status == 200){
+                else{
                     that.bol = false;
                     that.items[1].flagUser = true;
                     that.items[1].tipValue = response.data.errMsg;
                 }
             }).catch(function (error) {
-                console.log(error)
                 that.popFlag = true;
                 that.popMsg = "服务器错误";
                 that.$options.methods.popup(that);
