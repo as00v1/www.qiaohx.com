@@ -1,48 +1,29 @@
 <template lang="html">
     <div class="container">
-      <p>
-          <div class="btn-group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                新建
-                  <span class="caret"></span>
-                  <!-- <span class="sr-only">切换下拉菜单</span> -->
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">新建文档</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">新建Markdown</a></li>
-              </ul>
+        <div class="col-md-11 col-xs-9">
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="请输入标题">
           </div>
-          <button type="button" :click="btnSaveArticle()" class="btn btn-default dropdown-toggle" aria-expanded="false">保存</button>
-      </p>
-      
-      <div class="input-group">
-          <span class="input-group-addon">标题</span>
-          <input type="text" class="form-control" placeholder="无标题">
-      </div>
-      <br/>
-      <div class="form-inline">
-        <div class="input-group">
-          <label class="input-group-addon" for="groupname">分组</label>
-          <input type="text" class="form-control" id="groupname" placeholder="">
         </div>
-        <div class="input-group">
-          <label class="input-group-addon" for="keyword">关键字</label>
-          <input type="text" class="form-control" id="keyword" placeholder="">
+        <div class="col-md-1 col-xs-3">
+            <button type="button" :click="btnSaveArticle()" class="btn btn-primary dropdown-toggle" aria-expanded="false">保存</button>
         </div>
-      </div>
-      <br/>
-      <div id="editor-md" class="main-editor">
-        <textarea></textarea>
-      </div>
+        <div id="editor-md" class="main-editor">
+          <textarea v-model="articleContent"></textarea>
+        </div>
+        <Popup v-show="popFlag" :msg='popMsg'></Popup>
     </div>
 </template>
 
 <script>
-import $s from "scriptjs";
+import $s from "scriptjs"
+import Popup from './popup'
 
 export default {
     name: 'EditDocMainEditor',
+    components: {
+      Popup
+    },
     props: {
       editorPath: {
         type: String,
@@ -67,7 +48,7 @@ export default {
             // imageUploadURL: 'examples/php/upload.php',
             onload: () => {
               // eslint-disable-next-line
-              console.log('onload', this);
+              // console.log('onload', this);
             },
           };
         },
@@ -76,6 +57,9 @@ export default {
     data() {
       return {
         instance: null,
+        popFlag: false,
+        popMsg: "",
+        articleContent: ""
       };
     },
     created() {
@@ -94,24 +78,51 @@ export default {
     },
     methods: {
       initEditor() {
-        this.$nextTick((editorMD = window.editormd) => {
-          if (editorMD) {
-            this.instance = editorMD('editor-md', this.editorConfig);
-          }
-        });
+        if(this.$store.getters.certainLogin){
+          this.$nextTick((editorMD = window.editormd) => {
+            if (editorMD) {
+              this.instance = editorMD('editor-md', this.editorConfig);
+            }
+          });
+        }else {
+            this.popFlag = true;
+            this.popMsg = "登录过期，请重新登录"
+            this.common.popup(this);
+            
+            this.$store.commit('REMOVE_COUNT', '');
+            this.$router.push('/Login')
+        }
       },
       btnSaveArticle() {
-        this.$axios.post(this.$base.baseUrl + this.$base.articleAddUrl, {
-            "cid": "用户标识*",
-            "content": "文章内容*",
-            "groupId": "分组Id*",
-            "keyWord": "",
-            "title": "文章标题*"
-        }).then(function (response) {
-          console.log(response)
-        }).catch(function (error) {
-            console.log(error);
-        });
+        var that = this;
+        console.log("==========================")
+        console.log(this.articleContent)
+        // this.$axios.post(this.$base.baseUrl + this.$base.articleAddUrl, {
+        //     "cid": this.$store.state.token,
+        //     "content": "文章内容*",
+        //     "groupId": "分组Id*",
+        //     "keyWord": "",
+        //     "title": "文章标题*"
+        // }).then(function (response) {
+        //     console.log(response)
+        //     if(response.data.code == 0 && response.status == 200){
+        //         // that.$store.commit('ADD_COUNT', response.data.cid);
+        //         // that.$router.push('/')
+        //     }
+        //     else{
+        //         // that.bol = false;
+        //         // that.items[1].flagUser = true;
+        //         // that.items[1].tipValue = response.data.errMsg;
+        //         // that.popFlag = true;
+        //         // that.popMsg = "登录过期，请重新登录"
+        //         // that.common.popup(that);
+                
+        //         // that.$store.commit('REMOVE_COUNT', response.data.cid);
+        //         // that.$router.push('/Login')
+        //     }
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
       }
     }
   };

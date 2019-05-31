@@ -54,6 +54,7 @@ const store = new Vuex.Store({
     },
     getters: {
         certainLogin() {
+            console.log(store.state.token);
             return !common.isEmpty(store.state.token);
         }
     }
