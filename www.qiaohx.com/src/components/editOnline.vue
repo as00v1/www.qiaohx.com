@@ -77,6 +77,9 @@ export default {
     beforeDestroy() {
     },
     methods: {
+      getMarkdown() {
+        return this.instance.getMarkdown();
+      },
       initEditor() {
         if(this.$store.getters.certainLogin){
           this.$nextTick((editorMD = window.editormd) => {
@@ -96,7 +99,7 @@ export default {
       btnSaveArticle() {
         var that = this;
         console.log("==========================")
-        console.log(this.articleContent)
+        console.log(this.$options.methods.getMarkdown())
         // this.$axios.post(this.$base.baseUrl + this.$base.articleAddUrl, {
         //     "cid": this.$store.state.token,
         //     "content": "文章内容*",
