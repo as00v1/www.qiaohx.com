@@ -6,7 +6,7 @@
           </div>
         </div>
         <div class="col-md-1 col-xs-3">
-            <button type="button" :click="btnSaveArticle()" class="btn btn-primary dropdown-toggle" aria-expanded="false">保存</button>
+            <button type="button" @click="btnSaveArticle()" class="btn btn-primary dropdown-toggle" aria-expanded="false">保存</button>
         </div>
         <div id="editor-md" class="main-editor">
           <textarea v-model="articleContent"></textarea>
@@ -62,6 +62,13 @@ export default {
         articleContent: ""
       };
     },
+    watch: {
+      instance() {
+        console.log(this.instance)
+        deep: true
+        // return this.instance;
+      }
+    },
     created() {
     },
     mounted() {
@@ -77,14 +84,16 @@ export default {
     beforeDestroy() {
     },
     methods: {
-      getMarkdown() {
-        return this.instance.getMarkdown();
-      },
+      // getMarkdown() {
+      //   // return this.instance.getMarkdown();
+      //   console.log(this.instance)
+      // },
       initEditor() {
         if(this.$store.getters.certainLogin){
           this.$nextTick((editorMD = window.editormd) => {
             if (editorMD) {
               this.instance = editorMD('editor-md', this.editorConfig);
+              console.log(this.instance)
             }
           });
         }else {
@@ -99,7 +108,8 @@ export default {
       btnSaveArticle() {
         var that = this;
         console.log("==========================")
-        console.log(this.$options.methods.getMarkdown())
+        console.log(this.instance.getMarkdown())
+        // this.$options.methods.getMarkdown()
         // this.$axios.post(this.$base.baseUrl + this.$base.articleAddUrl, {
         //     "cid": this.$store.state.token,
         //     "content": "文章内容*",
