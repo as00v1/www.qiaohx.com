@@ -5,6 +5,7 @@ import Tool from '@/components/Tool'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
 import EditOnline from '@/components/EditOnline'
+import Other from '@/components/Other'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       meta: {
         requireAuth: true
       }
+    },
+    {
+      path: '/Other',
+      name: 'Other',
+      component: Other
     }
 
   ]

@@ -20,13 +20,13 @@ function accountType(val) {
         return '00';
     }
 }
-function popup(n) {
-    $(".popup" + n).fadeIn()
+function popup(e) {
     var num = 0;
+    var that = e;
     var timer = setInterval(function() {
         num++
         if(num >= 2) {
-            $(".popup" + n).fadeOut()
+            that.popFlag = false;
             clearInterval(timer)
         }
     }, 1000)

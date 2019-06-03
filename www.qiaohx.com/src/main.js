@@ -43,38 +43,36 @@ const store = new Vuex.Store({
         // 组件中采用 this.$store.commit('方法名') 的方式调用，充分显示解耦
         // 内部操作必须在此刻完成（同步）
         [ADD_COUNT] (state, token) {
-            sessionStorage.setItem("token",token);
+            localStorage.setItem("token",token);
             state.token = token;
-            state.isLogin = true;
         },
         [REMOVE_COUNT] (state, token) {
             // 退出登录
-            sessionStorage.removeItem("token",token);
+            localStorage.removeItem("token",token);
             state.token = token;
-            state.isLogin = false;
         }
     },
     getters: {
         certainLogin() {
-            var noLogin = false;
-            return noLogin;
+            console.log(store.state.token);
+            return !common.isEmpty(store.state.token);
         }
     }
 });
 
 router.beforeEach((to, from, next) => {
-    store.state.token = sessionStorage.getItem('token');
+    store.state.token = localStorage.getItem('token');
     // 获取本地存储的token
 
     if(to.meta.requireAuth) {
         // 判断该路由是否需要登录权限
-        if(store.state.token != "") {
+        if(!common.isEmpty(store.state.token)) {
             next();
             // 通过 store.state.token 获取当前 token是否存在
         }
         else {
             next({
-                path: '/login',
+                path: '/Login',
                 query: {redirect: to.fullPath}
                 // 将跳转的路由 path 作为参数，登录成功后跳转到该路由
             })

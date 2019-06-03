@@ -86,7 +86,7 @@ span.simply-word {
    width:42%;
     margin: 0 auto;
 }
-input[type="email"] {
+/* input[type="email"] {
     font-size: 15px;
     font-weight: 500;
     text-align: left;
@@ -99,7 +99,7 @@ input[type="email"] {
     border: 2px solid #d9d9de;
     outline: none;
     box-sizing: border-box;
-}
+} */
 button {
     font-size: 20px;
     font-weight: 500;
