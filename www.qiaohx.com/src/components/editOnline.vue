@@ -64,7 +64,7 @@ export default {
     },
     watch: {
       instance() {
-        console.log(this.instance)
+        // console.log(this.instance)
         deep: true
         // return this.instance;
       }

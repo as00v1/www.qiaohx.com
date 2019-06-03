@@ -56,7 +56,7 @@ export default {
       return {
           list: [
               {id: 0, text: "编辑", link: '/EditOnline'},
-              {id: 1, text: "其他",link: '/other'},
+              {id: 1, text: "其他",link: '/Other'},
               {id: 2, text: "关于", link: '/personal'}
           ]
       }
